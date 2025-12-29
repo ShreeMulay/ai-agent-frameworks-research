@@ -1,6 +1,6 @@
 # AI Agent Frameworks Research
 
-**Comprehensive comparison of 46 AI agent and LLM orchestration frameworks**
+**Comprehensive comparison of 64 AI agent and LLM orchestration frameworks**
 
 Last Updated: December 2025
 
@@ -12,7 +12,7 @@ Last Updated: December 2025
 |----------|-------------|----------|
 | [Dashboard (HTML)](./ai-agent-frameworks-dashboard.html) | Interactive filterable/sortable table with decision tree | Visual exploration, filtering by criteria |
 | [Pricing Calculator (HTML)](./ai-agent-pricing-calculator.html) | LLM cost calculator with 25+ models | Budget planning, model cost comparison |
-| [Comparison Spreadsheet (CSV)](./ai-agent-frameworks-comparison.csv) | Raw data: 46 frameworks x 18 columns | Excel/Sheets analysis, custom filtering |
+| [Comparison Spreadsheet (CSV)](./ai-agent-frameworks-comparison.csv) | Raw data: 64 frameworks x 18 columns | Excel/Sheets analysis, custom filtering |
 | [Deep Dive Guide (MD)](./ai-agent-frameworks-deep-dive.md) | Detailed analysis of top 15 frameworks | Learning framework internals, code examples |
 | [Getting Started Guide (MD)](./ai-agent-getting-started-guide.md) | Beginner's guide from first agent to production | New to AI agents, learning path |
 
@@ -24,45 +24,70 @@ Last Updated: December 2025
 What are you building?
 │
 ├─ Simple chatbot or RAG app
-│  └─ Start with: LangChain or LlamaIndex
+│  ├─ Quick start → LangChain or LlamaIndex
+│  ├─ Enterprise RAG → RAGFlow (70k stars!)
+│  └─ Desktop/local → AnythingLLM (53k stars)
 │
 ├─ Multi-agent collaboration
 │  ├─ Role-based teams → CrewAI
+│  ├─ AI software company → MetaGPT (62k stars!)
 │  ├─ Conversation-based → AutoGen/AG2
-│  └─ Fast & lightweight → Agno
+│  ├─ Fast & lightweight → Agno
+│  └─ Distributed agents → AgentScope (Alibaba)
 │
 ├─ Production enterprise app
 │  ├─ Microsoft/.NET shop → Semantic Kernel
 │  ├─ Google Cloud → Google ADK or Vertex AI
 │  ├─ AWS → Bedrock Agents or Strands SDK
-│  └─ OpenAI-only → OpenAI Agents SDK
+│  ├─ OpenAI-only → OpenAI Agents SDK
+│  └─ Microsoft 365/Teams → Microsoft 365 Agents
 │
-├─ Type-safe Python agents
-│  └─ PydanticAI (Pydantic validation built-in)
+├─ Coding assistant
+│  ├─ Terminal/CLI → Aider or Gemini CLI (89k stars!)
+│  ├─ Full IDE experience → OpenHands
+│  └─ GitHub issue fixing → SWE-agent (Princeton)
+│
+├─ Data & Web
+│  ├─ Web scraping for AI → Firecrawl (72k stars!)
+│  ├─ Browser automation → BrowserUse (74k stars!)
+│  └─ GraphRAG UI → Kotaemon (25k stars)
+│
+├─ Infrastructure & Memory
+│  ├─ Memory layer → Mem0 (45k stars)
+│  ├─ Secure code sandbox → Daytona (41k stars)
+│  └─ Tool integrations → Composio (26k stars)
 │
 ├─ Visual/low-code
 │  ├─ Technical users → LangFlow
-│  └─ Business automation → n8n or Lindy
+│  ├─ Business automation → n8n or Lindy
+│  └─ AI workflow automation → Activepieces (20k stars)
 │
-├─ Coding assistant
-│  ├─ Terminal/CLI → Aider
-│  └─ Full IDE experience → OpenHands
-│
-├─ Voice/realtime
-│  └─ LiveKit Agents
-│
-├─ Browser automation
-│  └─ BrowserUse (74k+ stars, fastest growing!)
-│
-├─ State machine agents
-│  └─ Burr (Apache Foundation)
-│
-├─ Enterprise with A2A
-│  └─ BeeAI Framework (IBM/Linux Foundation)
+├─ Specialized
+│  ├─ Deep research → DeerFlow (ByteDance)
+│  ├─ Customer service → Parlant (17k stars)
+│  ├─ State machine agents → Burr (Apache)
+│  └─ Stateful sessions → Julep
 │
 └─ Research/experimental
-   └─ DSPy (prompt optimization) or CAMEL-AI (multi-agent research)
+   └─ DSPy, CAMEL-AI, or PocketFlow (minimalist)
 ```
+
+---
+
+## Top 10 Frameworks by GitHub Stars
+
+| Rank | Framework | Stars | Category |
+|------|-----------|-------|----------|
+| 1 | **LangChain** | 122k | Core Orchestration |
+| 2 | **Gemini CLI** | 89k | Coding Agent |
+| 3 | **BrowserUse** | 74k | Browser Automation |
+| 4 | **Firecrawl** | 72k | Web Scraping |
+| 5 | **RAGFlow** | 71k | RAG Engine |
+| 6 | **OpenHands** | 66k | Coding Agent |
+| 7 | **MetaGPT** | 62k | Multi-Agent |
+| 8 | **AutoGen** | 53k | Multi-Agent |
+| 9 | **AnythingLLM** | 53k | RAG Platform |
+| 10 | **LangFlow** | 50k | Visual/Low-Code |
 
 ---
 
@@ -80,25 +105,53 @@ What are you building?
 ### Multi-Agent Systems
 | Framework | Stars | Best For | Risk |
 |-----------|-------|----------|------|
-| **CrewAI** | 42k | Role-based teams, workflows | Medium |
+| **MetaGPT** | 62k | AI software company, code generation | Medium |
 | **AutoGen** | 53k | Research, multi-agent conversation | Medium |
+| **CrewAI** | 42k | Role-based teams, workflows | Medium |
 | **Agno** | 36k | Fast multi-agent, Teams, AgentOS | Medium |
+| **OpenAI Swarm** | 21k | Educational (DEPRECATED) | High |
 | **Letta** | 20k | Persistent memory agents | Medium |
+| **AgentScope** | 15k | Distributed agents (Alibaba) | Low |
 | **Langroid** | 4k | Multi-agent RAG, SQL/document chat | Low |
 
-### RAG & Data
+### RAG & Data Platforms
 | Framework | Stars | Best For | Risk |
 |-----------|-------|----------|------|
-| **LlamaIndex** | 46k | Data ingestion, RAG, 160+ connectors | Low |
+| **RAGFlow** | 71k | Enterprise RAG, GraphRAG | Low |
+| **AnythingLLM** | 53k | Desktop RAG, local LLMs | Low |
+| **LlamaIndex** | 46k | Data ingestion, 160+ connectors | Low |
+| **Kotaemon** | 25k | RAG UI, GraphRAG, self-hostable | Low |
 | **Haystack** | 24k | Enterprise RAG, document QA | Low |
 
-### Lightweight & Fast
+### Coding Agents
 | Framework | Stars | Best For | Risk |
 |-----------|-------|----------|------|
-| **PydanticAI** | 14k | Type-safe agents, structured output | Medium |
-| **DSPy** | 31k | Prompt optimization, programmatic LLM | High |
-| **Smolagents** | 25k | Lightweight agents, HuggingFace | Medium |
-| **Mastra** | 19k | Full-stack TypeScript, MCP authoring | High |
+| **Gemini CLI** | 89k | Terminal AI, Gemini-powered | Low |
+| **OpenHands** | 66k | Full dev platform, IDE | Low |
+| **Aider** | 39k | Terminal pair programming, Git | Low |
+| **SWE-agent** | 18k | GitHub issue fixing (Princeton) | Medium |
+
+### Web & Browser
+| Framework | Stars | Best For | Risk |
+|-----------|-------|----------|------|
+| **BrowserUse** | 74k | Web automation, form filling | Low |
+| **Firecrawl** | 72k | Web scraping for AI, LLM-ready | Low |
+
+### Infrastructure & Memory
+| Framework | Stars | Best For | Risk |
+|-----------|-------|----------|------|
+| **Mem0** | 45k | Memory layer for AI agents | Low |
+| **Daytona** | 41k | Secure code execution sandbox | Low |
+| **Ray** | 35k | Distributed agent execution | Low |
+| **Composio** | 26k | 100+ tool integrations | Low |
+
+### Visual/Workflow Automation
+| Framework | Stars | Best For | Risk |
+|-----------|-------|----------|------|
+| **LangFlow** | 50k | Visual prototyping, drag-and-drop | Low |
+| **Activepieces** | 20k | AI workflow, 400 MCP servers | Low |
+| **n8n** | N/A | Workflow automation, 500+ integrations | Low |
+| **Lindy** | N/A | Business automation, non-technical | Low |
 
 ### Cloud Platforms (Managed)
 | Platform | Provider | Best For |
@@ -108,33 +161,28 @@ What are you building?
 | **Azure AI Foundry** | Microsoft | Azure-native enterprise |
 | **Vertex AI Agents** | Google | GCP-native, A2A support |
 
-### Visual/Low-Code
-| Framework | Stars | Best For |
-|-----------|-------|----------|
-| **LangFlow** | 50k | Visual prototyping, drag-and-drop |
-| **n8n** | N/A | Workflow automation, 500+ integrations |
-| **Lindy** | N/A | Business automation, non-technical users |
+### Enterprise Platforms
+| Framework | Stars | Best For | Risk |
+|-----------|-------|----------|------|
+| **Salesforce Agentforce** | N/A | Enterprise CRM, sales/service | Low |
+| **Microsoft 365 Agents** | 630 | Teams, Copilot extensions | Low |
+| **BeeAI Framework** | 3k | Enterprise multi-agent, A2A | Low |
 
-### Coding Agents
-| Framework | Stars | Best For |
-|-----------|-------|----------|
-| **Aider** | 39k | Terminal pair programming, Git |
-| **OpenHands** | 66k | Full dev platform, IDE experience |
+### Specialized
+| Framework | Stars | Best For | Risk |
+|-----------|-------|----------|------|
+| **DeerFlow** | 19k | Deep research (ByteDance) | Medium |
+| **Suna** | 19k | General agent platform | Medium |
+| **Parlant** | 17k | Customer service agents | Low |
+| **PocketFlow** | 9k | Minimalist 100-line framework | Medium |
+| **Julep** | 7k | Stateful agents with sessions | Medium |
+| **Burr** | 2k | State machine agents (Apache) | Low |
 
 ### Protocols
 | Protocol | Owner | Purpose |
 |----------|-------|---------|
 | **MCP** | Anthropic | Agent-to-tool connection standard |
 | **A2A** | Linux Foundation | Agent-to-agent communication |
-
-### Emerging/Specialized (NEW)
-| Framework | Stars | Best For | Risk |
-|-----------|-------|----------|------|
-| **BrowserUse** | 74k | Web automation, form filling, scraping | Low |
-| **BeeAI Framework** | 3k | Enterprise multi-agent, A2A support | Low |
-| **Julep** | 7k | Stateful agents with sessions | Medium |
-| **Burr** | 2k | State machine agents, chatbots | Low |
-| **ControlFlow** | 1k | ~~Task-centric workflows~~ (ARCHIVED - use Marvin) | High |
 
 ---
 
@@ -152,32 +200,32 @@ What are you building?
 
 ### For Researchers
 1. **DSPy** for prompt optimization
-2. **CAMEL-AI** for multi-agent research
-3. **AutoGen** for experimental multi-agent systems
+2. **SWE-agent** for code generation research
+3. **MetaGPT** for multi-agent software development
+4. **CAMEL-AI** for multi-agent research
 
 ---
 
 ## Key Insights from Research
 
 ### Protocol Support (MCP & A2A)
-- **MCP (Model Context Protocol)**: LangChain, LangGraph, PydanticAI, Mastra, Smolagents, Google ADK, Semantic Kernel, AWS Strands, BrowserUse, Langroid, BeeAI
+- **MCP (Model Context Protocol)**: LangChain, LangGraph, PydanticAI, Mastra, Smolagents, Google ADK, Semantic Kernel, AWS Strands, BrowserUse, Langroid, BeeAI, Gemini CLI, Firecrawl, RAGFlow, AnythingLLM, Composio, Activepieces
 - **A2A (Agent-to-Agent)**: Google ADK, Vertex AI, LangChain, LangGraph, PydanticAI, CrewAI, BeeAI Framework
 
 ### Funding & Stability
 | Tier | Frameworks |
 |------|------------|
-| **Big Tech Backed** | Semantic Kernel (Microsoft), Google ADK, OpenAI Agents SDK, AWS Strands, BeeAI (IBM) |
+| **Big Tech Backed** | Semantic Kernel, Google ADK, Gemini CLI, OpenAI Agents SDK, AWS Strands, BeeAI (IBM), DeerFlow (ByteDance), AgentScope (Alibaba), Microsoft 365 Agents |
 | **Foundation Backed** | Burr (Apache), A2A (Linux Foundation) |
-| **VC Unicorn** | LangChain ($125M), CrewAI, Haystack ($18M), BrowserUse |
-| **Growing** | PydanticAI, Agno, Mastra, Letta ($10M), Julep |
+| **VC Unicorn** | LangChain ($125M), CrewAI, Haystack ($18M), BrowserUse, Firecrawl, RAGFlow, Mem0, Daytona |
+| **Growing** | PydanticAI, Agno, Mastra, Letta ($10M), Julep, MetaGPT, AnythingLLM |
 
 ### Common Limitations
 - **LangChain**: Over-engineered for simple tasks, API churn
-- **CrewAI**: Higher learning curve, model compatibility issues
+- **MetaGPT**: High token costs, complex orchestration
 - **AutoGen**: Fork drama (AG2), experimental status
-- **DSPy**: Academic focus, steep learning curve
-- **Mastra**: Not true OSS license, TypeScript only
-- **ControlFlow**: ARCHIVED - merged into Marvin, do not use for new projects
+- **OpenAI Swarm**: DEPRECATED - use OpenAI Agents SDK instead
+- **ControlFlow**: ARCHIVED - merged into Marvin
 - **Julep**: Cloud-first, self-hosting can be complex
 
 ---
@@ -202,7 +250,7 @@ See [Pricing Calculator](./ai-agent-pricing-calculator.html) for interactive com
 ```
 ai-frameworks-research/
 ├── README.md                              # This file
-├── ai-agent-frameworks-comparison.csv     # Raw data (46 frameworks x 18 columns)
+├── ai-agent-frameworks-comparison.csv     # Raw data (64 frameworks x 18 columns)
 ├── ai-agent-frameworks-dashboard.html     # Interactive dashboard
 ├── ai-agent-pricing-calculator.html       # LLM cost calculator
 ├── ai-agent-frameworks-deep-dive.md       # Detailed framework analysis
@@ -211,47 +259,34 @@ ai-frameworks-research/
 
 ---
 
-## How to Use Each File
+## Framework Count by Category
 
-### Dashboard (HTML)
-1. Open `ai-agent-frameworks-dashboard.html` in any browser
-2. Use filters: Category, Language, Production Ready, Risk Level
-3. Click column headers to sort
-4. Switch tabs: Table | Decision Tree | Statistics
-5. Export filtered results to CSV
-
-### Pricing Calculator (HTML)
-1. Open `ai-agent-pricing-calculator.html` in any browser
-2. Enter expected monthly token usage
-3. Toggle caching on/off (where supported)
-4. Compare costs across 25+ models
-5. View visual cost comparisons
-
-### Comparison CSV
-1. Import into Excel, Google Sheets, or pandas
-2. Columns: Framework, Category, Stars, Funding, Languages, MCP/A2A, Production Ready, Risk, Use Cases, Limitations, etc.
-3. Filter and pivot as needed
-
-### Deep Dive Guide
-1. Read for detailed understanding of top 15 frameworks
-2. Includes: Installation, code examples, strengths, limitations
-3. Organized in 3 tiers: Production Ready → Growing → Specialized
-
-### Getting Started Guide
-1. Follow the 6-part learning path
-2. Part 1: First agent (30 min)
-3. Part 2: Tools and function calling
-4. Part 3: RAG implementation
-5. Part 4: Multi-agent systems
-6. Part 5: Production deployment
-7. Part 6: Migration paths between frameworks
+| Category | Count |
+|----------|-------|
+| Core Orchestration | 6 |
+| Multi-Agent | 9 |
+| RAG & Data | 5 |
+| Coding Agent | 4 |
+| Web/Browser | 2 |
+| Infrastructure/Memory | 4 |
+| Visual/Workflow | 4 |
+| Cloud Platform | 4 |
+| Enterprise Platform | 3 |
+| Specialized | 6 |
+| Lightweight | 7 |
+| Utility | 4 |
+| Protocol | 2 |
+| Research | 2 |
+| Voice/Realtime | 1 |
+| Observability | 1 |
+| **Total** | **64** |
 
 ---
 
 ## Research Methodology
 
 ### Sources Consulted
-- Official documentation for all 46 frameworks
+- Official documentation for all 64 frameworks
 - GitHub repositories (stars, issues, activity)
 - Benchmarks: SWE-bench, GAIA, AgentBench, WebArena
 - Community: Reddit r/LocalLLaMA, r/MachineLearning, Hacker News
@@ -265,41 +300,18 @@ ai-frameworks-research/
 
 ---
 
-## Framework Count by Category
-
-| Category | Count |
-|----------|-------|
-| Core Orchestration | 6 |
-| Multi-Agent | 5 |
-| RAG & Data | 2 |
-| Lightweight | 6 |
-| Cloud Platform | 4 |
-| Visual/Low-Code | 4 |
-| Coding Agent | 2 |
-| Protocol | 2 |
-| Infrastructure | 2 |
-| Utility | 4 |
-| Enterprise | 2 |
-| Voice/Realtime | 1 |
-| Research | 1 |
-| Browser Automation | 1 |
-| Workflow Orchestration | 1 |
-| Enterprise Multi-Agent | 1 |
-| Stateful Agents | 1 |
-| State Machine | 1 |
-| **Total** | **46** |
-
----
-
 ## Contributing
 
-This research is maintained in the `ai_projects` monorepo. To suggest updates:
+This research is open source! To suggest updates:
 1. Check if the framework/information is already covered
 2. Provide sources for any new data
 3. Focus on production-relevant information
+4. Open an issue or PR at [github.com/ShreeMulay/ai-agent-frameworks-research](https://github.com/ShreeMulay/ai-agent-frameworks-research)
 
 ---
 
 ## License
 
-Research compiled for internal use. Framework information sourced from public documentation and repositories.
+MIT License - Feel free to use this research for your own projects!
+
+Research compiled from public documentation and repositories.
