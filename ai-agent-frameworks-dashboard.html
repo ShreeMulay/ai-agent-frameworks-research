@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Agent Frameworks Dashboard</title>
+    <title>AI Agent Frameworks Dashboard - 64 Frameworks Compared</title>
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -11,6 +11,7 @@
             --bg-tertiary: #334155;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
+            --text-muted: #64748b;
             --accent: #3b82f6;
             --accent-hover: #2563eb;
             --success: #22c55e;
@@ -25,6 +26,7 @@
             --bg-tertiary: #e2e8f0;
             --text-primary: #1e293b;
             --text-secondary: #64748b;
+            --text-muted: #94a3b8;
             --border: #cbd5e1;
         }
         
@@ -38,13 +40,14 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.6;
+            line-height: 1.4;
+            font-size: 12px;
         }
         
         .container {
-            max-width: 1800px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 20px;
+            padding: 12px;
         }
         
         /* Header */
@@ -52,62 +55,74 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 16px;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 12px;
         }
         
         .header h1 {
-            font-size: 2rem;
+            font-size: 1.5rem;
             background: linear-gradient(135deg, var(--accent), #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         
+        .header-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
         .header-meta {
             display: flex;
-            gap: 20px;
+            gap: 12px;
             align-items: center;
         }
         
         .header-meta span {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         
-        .theme-toggle {
+        .btn {
             background: var(--bg-tertiary);
             border: 1px solid var(--border);
             color: var(--text-primary);
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             transition: all 0.2s;
         }
         
-        .theme-toggle:hover {
+        .btn:hover {
             background: var(--accent);
+        }
+        
+        .btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
         }
         
         /* Tabs */
         .tabs {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 6px;
+            margin-bottom: 12px;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
+            padding-bottom: 8px;
         }
         
         .tab {
-            padding: 10px 20px;
+            padding: 6px 14px;
             background: transparent;
             border: none;
             color: var(--text-secondary);
             cursor: pointer;
-            font-size: 1rem;
-            border-radius: 8px 8px 0 0;
+            font-size: 0.85rem;
+            border-radius: 6px 6px 0 0;
             transition: all 0.2s;
         }
         
@@ -128,131 +143,154 @@
             display: block;
         }
         
-        /* Stats Cards */
+        /* Stats Cards - Compact */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 8px;
+            margin-bottom: 12px;
         }
         
         .stat-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 8px;
+            padding: 10px;
             text-align: center;
         }
         
         .stat-card h3 {
-            font-size: 2.5rem;
+            font-size: 1.4rem;
             color: var(--accent);
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
         
         .stat-card p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.65rem;
         }
         
-        /* Filters */
+        /* Filters - Compact */
         .filters {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
         }
         
         .filters h3 {
-            margin-bottom: 15px;
             color: var(--text-primary);
+            font-size: 0.85rem;
         }
         
         .filter-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 8px;
         }
         
         .filter-group {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 3px;
         }
         
         .filter-group label {
-            font-size: 0.85rem;
+            font-size: 0.65rem;
             color: var(--text-secondary);
         }
         
         .filter-group select,
         .filter-group input {
-            padding: 10px;
+            padding: 5px 6px;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 4px;
             background: var(--bg-tertiary);
             color: var(--text-primary);
-            font-size: 0.9rem;
-        }
-        
-        .filter-group input::placeholder {
-            color: var(--text-secondary);
+            font-size: 0.7rem;
         }
         
         .checkbox-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 6px;
         }
         
         .checkbox-label {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 0.85rem;
+            gap: 2px;
+            font-size: 0.65rem;
             color: var(--text-secondary);
             cursor: pointer;
         }
         
         .checkbox-label input {
-            width: 16px;
-            height: 16px;
+            width: 11px;
+            height: 11px;
         }
         
         .clear-filters {
             background: var(--danger);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 5px 10px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 0.9rem;
-            margin-top: 10px;
+            font-size: 0.7rem;
         }
         
-        /* Table */
+        /* Table - Dense */
         .table-container {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
+        }
+        
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 10px;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .result-count {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+        }
+        
+        .result-count strong {
+            color: var(--accent);
         }
         
         .table-wrapper {
             overflow-x: auto;
+            max-height: calc(100vh - 300px);
+            overflow-y: auto;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9rem;
+            font-size: 0.68rem;
         }
         
         th, td {
-            padding: 12px 15px;
+            padding: 5px 6px;
             text-align: left;
             border-bottom: 1px solid var(--border);
+            vertical-align: top;
         }
         
         th {
@@ -261,6 +299,10 @@
             cursor: pointer;
             white-space: nowrap;
             user-select: none;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            font-size: 0.65rem;
         }
         
         th:hover {
@@ -268,25 +310,48 @@
         }
         
         th .sort-icon {
-            margin-left: 5px;
+            margin-left: 2px;
             opacity: 0.5;
+            font-size: 0.6rem;
         }
         
-        th.sorted .sort-icon {
-            opacity: 1;
+        tr:nth-child(even) {
+            background: rgba(255,255,255,0.02);
         }
         
         tr:hover {
             background: var(--bg-tertiary);
         }
         
-        /* Badges */
+        /* Column widths */
+        .col-name { min-width: 100px; max-width: 130px; }
+        .col-cat { min-width: 80px; max-width: 100px; }
+        .col-desc { min-width: 160px; max-width: 220px; }
+        .col-bestfor { min-width: 110px; max-width: 150px; }
+        .col-limit { min-width: 100px; max-width: 140px; }
+        .col-stars { min-width: 40px; text-align: right; }
+        .col-lang { min-width: 50px; }
+        .col-icon { min-width: 24px; text-align: center; }
+        .col-prod { min-width: 48px; }
+        .col-risk { min-width: 38px; }
+        .col-license { min-width: 55px; }
+        .col-activity { min-width: 45px; }
+        
+        /* Text wrapping for description columns */
+        .wrap-text {
+            white-space: normal;
+            word-wrap: break-word;
+            line-height: 1.25;
+        }
+        
+        /* Badges - Compact */
         .badge {
             display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 1px 5px;
+            border-radius: 8px;
+            font-size: 0.6rem;
             font-weight: 500;
+            white-space: nowrap;
         }
         
         .badge-success { background: rgba(34, 197, 94, 0.2); color: var(--success); }
@@ -295,102 +360,81 @@
         .badge-info { background: rgba(59, 130, 246, 0.2); color: var(--accent); }
         .badge-secondary { background: var(--bg-tertiary); color: var(--text-secondary); }
         
-        /* Support indicators */
-        .support-yes { color: var(--success); }
-        .support-partial { color: var(--warning); }
-        .support-no { color: var(--text-secondary); }
-        
-        /* Framework name with link */
-        .framework-name {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
+        /* Category badges with colors */
+        .cat-badge {
+            display: inline-block;
+            padding: 1px 5px;
+            border-radius: 8px;
+            font-size: 0.58rem;
+            font-weight: 500;
+            white-space: nowrap;
         }
         
+        /* Icon indicators */
+        .icon-yes { color: var(--success); font-size: 0.75rem; }
+        .icon-partial { color: var(--warning); font-size: 0.65rem; }
+        .icon-no { color: var(--text-muted); font-size: 0.7rem; }
+        
+        /* Framework name with link */
         .framework-name a {
             color: var(--accent);
             text-decoration: none;
             font-weight: 600;
+            font-size: 0.7rem;
         }
         
         .framework-name a:hover {
             text-decoration: underline;
         }
         
-        .framework-name small {
-            color: var(--text-secondary);
-            font-size: 0.75rem;
+        .framework-name .funding {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.55rem;
+            margin-top: 1px;
         }
         
         /* Stars formatting */
         .stars {
             font-weight: 500;
+            font-size: 0.65rem;
         }
+        .stars-high { color: var(--success); }
+        .stars-med { color: var(--warning); }
+        .stars-low { color: var(--text-secondary); }
         
-        /* Expandable row */
-        .expand-btn {
-            background: none;
-            border: none;
-            color: var(--accent);
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 0 5px;
-        }
+        /* Activity indicator */
+        .activity-active { color: var(--success); font-size: 0.6rem; }
+        .activity-moderate { color: var(--warning); font-size: 0.6rem; }
+        .activity-stale { color: var(--danger); font-size: 0.6rem; }
+        .activity-archived { color: var(--text-muted); text-decoration: line-through; font-size: 0.6rem; }
         
-        .details-row {
-            display: none;
-            background: var(--bg-tertiary);
-        }
-        
-        .details-row.visible {
-            display: table-row;
-        }
-        
-        .details-content {
-            padding: 20px;
-        }
-        
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .details-section h4 {
-            color: var(--accent);
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-        
-        .details-section p,
-        .details-section ul {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-        
-        .details-section ul {
-            padding-left: 20px;
-        }
+        /* License colors */
+        .license-permissive { color: var(--success); font-size: 0.6rem; }
+        .license-copyleft { color: var(--warning); font-size: 0.6rem; }
+        .license-commercial { color: var(--text-muted); font-size: 0.6rem; }
+        .license-restrictive { color: var(--danger); font-size: 0.6rem; }
         
         /* Decision Tree */
         .decision-tree {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
+            border-radius: 8px;
+            padding: 20px;
         }
         
         .decision-tree h2 {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             text-align: center;
+            font-size: 1.1rem;
         }
         
         .tree-container {
             font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
+            font-size: 0.72rem;
             overflow-x: auto;
             white-space: pre;
-            line-height: 1.4;
+            line-height: 1.3;
             color: var(--text-secondary);
         }
         
@@ -411,18 +455,18 @@
         /* Export buttons */
         .export-buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 8px;
+            margin-top: 12px;
         }
         
         .export-btn {
             background: var(--accent);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.7rem;
             transition: all 0.2s;
         }
         
@@ -430,17 +474,23 @@
             background: var(--accent-hover);
         }
         
-        /* Result count */
-        .result-count {
-            padding: 15px 20px;
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 6px 10px;
             background: var(--bg-tertiary);
-            border-bottom: 1px solid var(--border);
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            font-size: 0.65rem;
         }
         
-        .result-count strong {
-            color: var(--accent);
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            color: var(--text-secondary);
         }
         
         /* Responsive */
@@ -451,27 +501,33 @@
             }
             
             .filter-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr 1fr;
             }
             
             .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
         }
         
         /* Print styles */
         @media print {
-            .filters, .tabs, .theme-toggle, .export-buttons, .expand-btn {
+            .filters, .tabs, .btn, .export-buttons, .legend {
                 display: none !important;
             }
             
             body {
                 background: white;
                 color: black;
+                font-size: 7pt;
             }
             
-            .table-container {
-                border: 1px solid #ccc;
+            .table-wrapper {
+                max-height: none;
+                overflow: visible;
+            }
+            
+            th, td {
+                padding: 3px 4px;
             }
         }
     </style>
@@ -480,10 +536,12 @@
     <div class="container">
         <header class="header">
             <h1>AI Agent Frameworks Dashboard</h1>
-            <div class="header-meta">
-                <span>Last Updated: December 23, 2025</span>
-                <span id="framework-count">64 Frameworks</span>
-                <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+            <div class="header-controls">
+                <div class="header-meta">
+                    <span>Dec 2025</span>
+                    <span id="framework-count">64 Frameworks</span>
+                </div>
+                <button class="btn" onclick="toggleTheme()">Theme</button>
             </div>
         </header>
         
@@ -496,89 +554,75 @@
         <!-- Table Tab -->
         <div id="table-tab" class="tab-content active">
             <div class="stats-grid">
-<div class="stat-card">
-                                    <h3 id="total-count">64</h3>
-                                    <p>Total Frameworks</p>
-                                </div>
                 <div class="stat-card">
-                    <h3 id="production-count">25</h3>
-                    <p>Production Ready</p>
+                    <h3 id="total-count">64</h3>
+                    <p>Total</p>
                 </div>
                 <div class="stat-card">
-                    <h3 id="mcp-count">18</h3>
-                    <p>MCP Support</p>
+                    <h3 id="production-count">35</h3>
+                    <p>Prod Ready</p>
                 </div>
                 <div class="stat-card">
-                    <h3 id="low-risk-count">20</h3>
+                    <h3 id="mcp-count">22</h3>
+                    <p>MCP</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="low-risk-count">38</h3>
                     <p>Low Risk</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="opensource-count">58</h3>
+                    <p>OSS</p>
                 </div>
             </div>
             
             <div class="filters">
-                <h3>Filters</h3>
+                <div class="filters-header">
+                    <h3>Filters</h3>
+                    <button class="clear-filters" onclick="clearFilters()">Clear</button>
+                </div>
                 <div class="filter-grid">
                     <div class="filter-group">
                         <label>Search</label>
-                        <input type="text" id="search" placeholder="Search frameworks..." onkeyup="filterTable()">
+                        <input type="text" id="search" placeholder="Name, use case..." onkeyup="filterTable()">
                     </div>
                     <div class="filter-group">
                         <label>Category</label>
                         <select id="category-filter" onchange="filterTable()">
-                            <option value="">All Categories</option>
-                            <option value="Core Orchestration">Core Orchestration</option>
+                            <option value="">All</option>
+                            <option value="Core Orchestration">Core Orch</option>
                             <option value="Multi-Agent">Multi-Agent</option>
-                            <option value="RAG & Data">RAG & Data</option>
+                            <option value="RAG">RAG/Data</option>
                             <option value="Lightweight">Lightweight</option>
                             <option value="Utility">Utility</option>
-                            <option value="Cloud Platform">Cloud Platform</option>
-                            <option value="Visual/Low-Code">Visual/Low-Code</option>
-                            <option value="Coding Agent">Coding Agent</option>
-                            <option value="Protocol">Protocol</option>
-                            <option value="Infrastructure">Infrastructure</option>
-                            <option value="Enterprise Platform">Enterprise Platform</option>
-                            <option value="Voice/Realtime">Voice/Realtime</option>
-                            <option value="Research">Research</option>
-                            <option value="Browser Automation">Browser Automation</option>
-                            <option value="Workflow Orchestration">Workflow Orchestration</option>
-                            <option value="Enterprise Multi-Agent">Enterprise Multi-Agent</option>
-                            <option value="Stateful Agents">Stateful Agents</option>
-                            <option value="State Machine">State Machine</option>
-                            <option value="Web Scraping">Web Scraping</option>
-                            <option value="RAG Engine">RAG Engine</option>
-                            <option value="RAG Platform">RAG Platform</option>
-                            <option value="RAG UI">RAG UI</option>
-                            <option value="Memory Infrastructure">Memory Infrastructure</option>
-                            <option value="Code Sandbox">Code Sandbox</option>
-                            <option value="Tool Integration">Tool Integration</option>
-                            <option value="Deep Research">Deep Research</option>
-                            <option value="General Agent">General Agent</option>
-                            <option value="Customer Service">Customer Service</option>
-                            <option value="Meta-Framework">Meta-Framework</option>
+                            <option value="Cloud Platform">Cloud</option>
+                            <option value="Visual">Visual</option>
+                            <option value="Coding Agent">Coding</option>
+                            <option value="Browser">Browser</option>
+                            <option value="Infrastructure">Infra</option>
+                            <option value="Enterprise">Enterprise</option>
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>Primary Language</label>
+                        <label>Language</label>
                         <select id="language-filter" onchange="filterTable()">
-                            <option value="">All Languages</option>
+                            <option value="">All</option>
                             <option value="Python">Python</option>
                             <option value="TypeScript">TypeScript</option>
                             <option value="C#">C#</option>
-                            <option value="Visual">Visual/Low-Code</option>
-                            <option value="Managed">Managed/SaaS</option>
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>Production Ready</label>
+                        <label>Production</label>
                         <select id="production-filter" onchange="filterTable()">
                             <option value="">All</option>
                             <option value="Yes">Yes</option>
                             <option value="Growing">Growing</option>
                             <option value="Experimental">Experimental</option>
-                            <option value="Research">Research</option>
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>Risk Level</label>
+                        <label>Risk</label>
                         <select id="risk-filter" onchange="filterTable()">
                             <option value="">All</option>
                             <option value="Low">Low</option>
@@ -587,7 +631,16 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>Protocol Support</label>
+                        <label>License</label>
+                        <select id="license-filter" onchange="filterTable()">
+                            <option value="">All</option>
+                            <option value="MIT">MIT</option>
+                            <option value="Apache">Apache</option>
+                            <option value="Commercial">Commercial</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Features</label>
                         <div class="checkbox-group">
                             <label class="checkbox-label">
                                 <input type="checkbox" id="mcp-filter" onchange="filterTable()"> MCP
@@ -596,45 +649,58 @@
                                 <input type="checkbox" id="a2a-filter" onchange="filterTable()"> A2A
                             </label>
                             <label class="checkbox-label">
-                                <input type="checkbox" id="multimodal-filter" onchange="filterTable()"> Multimodal
+                                <input type="checkbox" id="multimodal-filter" onchange="filterTable()"> MM
                             </label>
                         </div>
                     </div>
                 </div>
-                <button class="clear-filters" onclick="clearFilters()">Clear All Filters</button>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item"><span class="icon-yes">&#10003;</span>=Yes</div>
+                <div class="legend-item"><span class="icon-partial">&#9679;</span>=Partial</div>
+                <div class="legend-item"><span class="icon-no">&#10005;</span>=No</div>
+                <div class="legend-item">|</div>
+                <div class="legend-item"><span class="license-permissive">MIT/Apache</span>=Permissive</div>
+                <div class="legend-item"><span class="license-restrictive">BSL</span>=Restrictive</div>
+                <div class="legend-item"><span class="license-commercial">Comm</span>=Commercial</div>
             </div>
             
             <div class="table-container">
-                <div class="result-count">
-                    Showing <strong id="visible-count">64</strong> of <strong>64</strong> frameworks
+                <div class="table-header">
+                    <div class="result-count">
+                        Showing <strong id="visible-count">64</strong> of <strong>64</strong> frameworks
+                    </div>
                 </div>
                 <div class="table-wrapper">
                     <table id="frameworks-table">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th onclick="sortTable(1)">Framework <span class="sort-icon">↕</span></th>
-                                <th onclick="sortTable(2)">Category <span class="sort-icon">↕</span></th>
-                                <th onclick="sortTable(3)">Stars <span class="sort-icon">↕</span></th>
-                                <th onclick="sortTable(4)">Language <span class="sort-icon">↕</span></th>
-                                <th>MCP</th>
-                                <th>A2A</th>
-                                <th>Multimodal</th>
-                                <th onclick="sortTable(8)">Production <span class="sort-icon">↕</span></th>
-                                <th onclick="sortTable(9)">Risk <span class="sort-icon">↕</span></th>
-                                <th onclick="sortTable(10)">Setup <span class="sort-icon">↕</span></th>
+                                <th class="col-name" onclick="sortTable('name')">Name <span class="sort-icon">&#8597;</span></th>
+                                <th class="col-cat" onclick="sortTable('category')">Category <span class="sort-icon">&#8597;</span></th>
+                                <th class="col-desc">Description</th>
+                                <th class="col-bestfor">Best For</th>
+                                <th class="col-limit">Limitations</th>
+                                <th class="col-stars" onclick="sortTable('stars')">&#9733; <span class="sort-icon">&#8597;</span></th>
+                                <th class="col-lang">Lang</th>
+                                <th class="col-icon" title="MCP Protocol">MCP</th>
+                                <th class="col-icon" title="A2A Protocol">A2A</th>
+                                <th class="col-icon" title="Multimodal">MM</th>
+                                <th class="col-prod" onclick="sortTable('production')">Prod <span class="sort-icon">&#8597;</span></th>
+                                <th class="col-risk" onclick="sortTable('risk')">Risk <span class="sort-icon">&#8597;</span></th>
+                                <th class="col-license" onclick="sortTable('license')">License <span class="sort-icon">&#8597;</span></th>
+                                <th class="col-activity">Status</th>
                             </tr>
                         </thead>
                         <tbody id="table-body">
-                            <!-- Rows will be inserted by JavaScript -->
                         </tbody>
                     </table>
                 </div>
             </div>
             
             <div class="export-buttons">
-                <button class="export-btn" onclick="exportCSV()">Download CSV</button>
-                <button class="export-btn" onclick="window.print()">Print View</button>
+                <button class="export-btn" onclick="exportCSV()">CSV</button>
+                <button class="export-btn" onclick="window.print()">Print</button>
             </div>
         </div>
         
@@ -644,94 +710,74 @@
                 <h2>AI Agent Framework Decision Tree</h2>
                 <div class="tree-container">
 <span class="highlight">START: What's your PRIMARY goal?</span>
-│
-├─► <span class="highlight">SIMPLE RAG / Q&A</span>
-│   │
-│   ├─► Need 160+ data connectors? ──► <span class="framework">LlamaIndex</span>
-│   ├─► Enterprise reliability critical? ──► <span class="framework">Haystack</span>
-│   └─► Quick prototype? ──► <span class="framework">LangChain</span> + basic retriever
-│
-├─► <span class="highlight">SINGLE AGENT WITH TOOLS</span>
-│   │
-│   ├─► Want type safety? ──► <span class="framework">PydanticAI</span>
-│   ├─► Using OpenAI? ──► <span class="framework">OpenAI Agents SDK</span>
-│   ├─► Want minimal code? ──► <span class="framework">Smolagents</span>
-│   ├─► Google ecosystem? ──► <span class="framework">Google ADK</span> or <span class="framework">Genkit</span>
-│   └─► General purpose? ──► <span class="framework">LangChain</span>
-│
-├─► <span class="highlight">MULTI-AGENT ORCHESTRATION</span>
-│   │
-│   ├─► Need role-based teams? ──► <span class="framework">CrewAI</span>
-│   ├─► Need stateful graphs/cycles? ──► <span class="framework">LangGraph</span>
-│   ├─► Need persistent memory? ──► <span class="framework">Letta</span>
-│   ├─► Research/experimentation? ──► <span class="framework">AutoGen</span>
-│   ├─► Maximum performance? ──► <span class="framework">Agno</span>
-│   └─► TypeScript preferred? ──► <span class="framework">Mastra</span>
-│
-├─► <span class="highlight">ENTERPRISE DEPLOYMENT</span>
-│   │
-│   ├─► Microsoft/Azure ecosystem?
-│   │   ├─► .NET team? ──► <span class="framework">Semantic Kernel (C#)</span>
-│   │   ├─► Python team? ──► <span class="framework">Semantic Kernel (Python)</span> or <span class="framework">AutoGen</span>
-│   │   └─► Managed service? ──► <span class="framework">Azure AI Foundry</span>
-│   │
-│   ├─► Google Cloud ecosystem?
-│   │   ├─► Complex agents? ──► <span class="framework">Google ADK</span> + Vertex AI Agent Engine
-│   │   ├─► Simple AI features? ──► <span class="framework">Genkit</span>
-│   │   └─► Managed service? ──► <span class="framework">Vertex AI Agents</span>
-│   │
-│   ├─► AWS ecosystem?
-│   │   ├─► Fully managed? ──► <span class="framework">Amazon Bedrock Agents</span>
-│   │   └─► SDK control? ──► <span class="framework">AWS Strands SDK</span>
-│   │
-│   └─► Cloud agnostic?
-│       └─► <span class="framework">LangChain + LangGraph + LangSmith</span>
-│
-├─► <span class="highlight">VISUAL / LOW-CODE</span>
-│   │
-│   ├─► Developer-friendly visual builder? ──► <span class="framework">LangFlow</span>
-│   ├─► Business workflow automation? ──► <span class="framework">n8n AI Agents</span>
-│   ├─► Non-technical users? ──► <span class="framework">Lindy</span>
-│   └─► Agent management GUI? ──► <span class="framework">SuperAGI</span>
-│
-├─► <span class="highlight">CODING ASSISTANT</span>
-│   │
-│   ├─► Terminal-based? ──► <span class="framework">Aider</span>
-│   └─► Full IDE experience? ──► <span class="framework">OpenHands</span>
-│
-└─► <span class="highlight">SPECIALIZED NEEDS</span>
-    │
-    ├─► Prompt optimization? ──► <span class="framework">DSPy</span>
-    ├─► Guaranteed JSON output? ──► <span class="framework">Outlines</span> or <span class="framework">Instructor</span>
-    ├─► Voice/real-time? ──► <span class="framework">LiveKit Agents</span> or OpenAI Realtime
-    ├─► Browser automation? ──► <span class="framework">BrowserUse</span> (74k+ stars!)
-    ├─► Web scraping for AI? ──► <span class="framework">Firecrawl</span> (72k stars!)
-    ├─► State machine agents? ──► <span class="framework">Burr</span> (Apache Foundation)
-    ├─► Enterprise A2A support? ──► <span class="framework">BeeAI Framework</span> (IBM/Linux Foundation)
-    ├─► Stateful session agents? ──► <span class="framework">Julep</span> or <span class="framework">Letta</span>
-    ├─► Memory layer for agents? ──► <span class="framework">Mem0</span> (45k stars)
-    ├─► Secure code sandbox? ──► <span class="framework">Daytona</span> (41k stars)
-    ├─► Deep research agents? ──► <span class="framework">DeerFlow</span> (ByteDance)
-    ├─► Customer service agents? ──► <span class="framework">Parlant</span>
-    └─► Tool integrations (100+)? ──► <span class="framework">Composio</span>
+|
++-> <span class="highlight">SIMPLE RAG / Q&A</span>
+|   +-> Need 160+ data connectors? --> <span class="framework">LlamaIndex</span>
+|   +-> Enterprise RAG with GraphRAG? --> <span class="framework">RAGFlow</span> (71k stars!)
+|   +-> Desktop/local LLMs? --> <span class="framework">AnythingLLM</span> (53k stars)
+|   +-> Self-hosted RAG UI? --> <span class="framework">Kotaemon</span>
+|   \-> Quick prototype? --> <span class="framework">LangChain</span>
+|
++-> <span class="highlight">SINGLE AGENT WITH TOOLS</span>
+|   +-> Want type safety? --> <span class="framework">PydanticAI</span>
+|   +-> Using OpenAI? --> <span class="framework">OpenAI Agents SDK</span>
+|   +-> Want minimal code? --> <span class="framework">Smolagents</span>
+|   +-> Google ecosystem? --> <span class="framework">Google ADK</span> or <span class="framework">Genkit</span>
+|   \-> General purpose? --> <span class="framework">LangChain</span>
+|
++-> <span class="highlight">MULTI-AGENT ORCHESTRATION</span>
+|   +-> AI software company? --> <span class="framework">MetaGPT</span> (62k stars!)
+|   +-> Need role-based teams? --> <span class="framework">CrewAI</span>
+|   +-> Need stateful graphs/cycles? --> <span class="framework">LangGraph</span>
+|   +-> Need persistent memory? --> <span class="framework">Letta</span> or <span class="framework">Mem0</span>
+|   +-> Research/experimentation? --> <span class="framework">AutoGen</span>
+|   +-> Maximum performance? --> <span class="framework">Agno</span>
+|   +-> Distributed agents? --> <span class="framework">AgentScope</span> (Alibaba)
+|   \-> TypeScript preferred? --> <span class="framework">Mastra</span>
+|
++-> <span class="highlight">CODING ASSISTANT</span>
+|   +-> Google/Gemini CLI? --> <span class="framework">Gemini CLI</span> (89k stars!)
+|   +-> Terminal pair programming? --> <span class="framework">Aider</span>
+|   +-> Full IDE experience? --> <span class="framework">OpenHands</span>
+|   \-> GitHub issue fixing? --> <span class="framework">SWE-agent</span> (Princeton)
+|
++-> <span class="highlight">WEB & BROWSER</span>
+|   +-> Browser automation? --> <span class="framework">BrowserUse</span> (74k stars!)
+|   \-> Web scraping for AI? --> <span class="framework">Firecrawl</span> (72k stars!)
+|
++-> <span class="highlight">ENTERPRISE DEPLOYMENT</span>
+|   +-> Microsoft/.NET? --> <span class="framework">Semantic Kernel</span>
+|   +-> Microsoft 365/Teams? --> <span class="framework">Microsoft 365 Agents</span>
+|   +-> Google Cloud? --> <span class="framework">Google ADK</span> + Vertex AI
+|   +-> AWS? --> <span class="framework">Bedrock Agents</span> or <span class="framework">Strands SDK</span>
+|   \-> IBM/Linux Foundation? --> <span class="framework">BeeAI Framework</span>
+|
++-> <span class="highlight">VISUAL / LOW-CODE</span>
+|   +-> Developer visual builder? --> <span class="framework">LangFlow</span> (50k stars)
+|   +-> AI workflow automation? --> <span class="framework">Activepieces</span> or <span class="framework">n8n</span>
+|   \-> Non-technical users? --> <span class="framework">Lindy</span>
+|
+\-> <span class="highlight">SPECIALIZED NEEDS</span>
+    +-> Memory layer for agents? --> <span class="framework">Mem0</span> (45k stars)
+    +-> Secure code sandbox? --> <span class="framework">Daytona</span> (41k stars)
+    +-> Tool integrations (100+)? --> <span class="framework">Composio</span>
+    +-> Deep research? --> <span class="framework">DeerFlow</span> (ByteDance)
+    +-> Customer service? --> <span class="framework">Parlant</span>
+    +-> State machine agents? --> <span class="framework">Burr</span> (Apache)
+    +-> Prompt optimization? --> <span class="framework">DSPy</span>
+    \-> Guaranteed JSON? --> <span class="framework">Outlines</span> or <span class="framework">Instructor</span>
 
-═══════════════════════════════════════════════════════════════════════════════
+========================================================================
 
-<span class="warning">⚠️  ANTI-PATTERN WARNINGS</span>
+<span class="warning">!! DEPRECATED / ARCHIVED - DO NOT USE</span>
+   X <span class="warning">OpenAI Swarm</span> --> Use OpenAI Agents SDK instead
+   X <span class="warning">ControlFlow</span> --> Archived, merged into Marvin
 
-<span class="warning">❌ DON'T USE AGENTS WHEN:</span>
-   • Simple RAG with &lt;3 steps → Use direct vector search
-   • Fixed linear workflow → Use Airflow/n8n without LLM orchestration
-   • Sub-second latency required → Use single LLM call + caching
-   • High volume (1M+/day) simple classification → Use fine-tuned classifier
-   • Rule-based logic → Use if/else or rule engine
-
-<span class="warning">❌ COMMON MISTAKES:</span>
-   • Picking LangChain because of stars (may be overkill for simple tasks)
-   • Multi-agent for email routing (single prompt often sufficient)
-   • Ignoring ops complexity (agents need monitoring, not just deployment)
-   • No token budget (AutoGen loops can explode costs)
-   • Skipping human-in-the-loop for irreversible actions
+<span class="warning">!! ANTI-PATTERNS</span>
+   X Simple RAG (<3 steps) --> Use direct vector search
+   X Fixed linear workflow --> Use Airflow/n8n without LLM
+   X Sub-second latency --> Single LLM call + caching
+   X High volume simple tasks --> Fine-tuned classifier
                 </div>
             </div>
         </div>
@@ -739,290 +785,211 @@
         <!-- Stats Tab -->
         <div id="stats-tab" class="tab-content">
             <div class="stats-grid">
-                <div class="stat-card">
-                    <h3>64</h3>
-                    <p>Total Frameworks</p>
-                </div>
-                <div class="stat-card">
-                    <h3>6</h3>
-                    <p>Core Orchestration</p>
-                </div>
-                <div class="stat-card">
-                    <h3>9</h3>
-                    <p>Multi-Agent</p>
-                </div>
-                <div class="stat-card">
-                    <h3>6</h3>
-                    <p>RAG/Data/Memory</p>
-                </div>
-                <div class="stat-card">
-                    <h3>7</h3>
-                    <p>Lightweight</p>
-                </div>
-                <div class="stat-card">
-                    <h3>4</h3>
-                    <p>Coding Agents</p>
-                </div>
-                <div class="stat-card">
-                    <h3>4</h3>
-                    <p>Cloud Platforms</p>
-                </div>
-                <div class="stat-card">
-                    <h3>5</h3>
-                    <p>Visual/Workflow</p>
-                </div>
-                <div class="stat-card">
-                    <h3>3</h3>
-                    <p>Enterprise</p>
-                </div>
-                <div class="stat-card">
-                    <h3>2</h3>
-                    <p>Protocols</p>
-                </div>
-                <div class="stat-card">
-                    <h3>4</h3>
-                    <p>Infrastructure</p>
-                </div>
-                <div class="stat-card">
-                    <h3>4</h3>
-                    <p>Specialized</p>
-                </div>
+                <div class="stat-card"><h3>64</h3><p>Total</p></div>
+                <div class="stat-card"><h3>6</h3><p>Core Orch</p></div>
+                <div class="stat-card"><h3>9</h3><p>Multi-Agent</p></div>
+                <div class="stat-card"><h3>5</h3><p>RAG/Data</p></div>
+                <div class="stat-card"><h3>4</h3><p>Coding</p></div>
+                <div class="stat-card"><h3>2</h3><p>Browser</p></div>
+                <div class="stat-card"><h3>4</h3><p>Infra</p></div>
+                <div class="stat-card"><h3>5</h3><p>Visual</p></div>
+                <div class="stat-card"><h3>4</h3><p>Cloud</p></div>
+                <div class="stat-card"><h3>3</h3><p>Enterprise</p></div>
+                <div class="stat-card"><h3>7</h3><p>Lightweight</p></div>
+                <div class="stat-card"><h3>2</h3><p>Protocol</p></div>
             </div>
             
-            <div class="filters" style="margin-top: 20px;">
-                <h3>By Production Readiness</h3>
-                <div class="stats-grid" style="margin-top: 15px;">
-                    <div class="stat-card">
-                        <h3 style="color: var(--success);">25</h3>
-                        <p>Production Ready</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 style="color: var(--warning);">10</h3>
-                        <p>Growing</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 style="color: var(--danger);">3</h3>
-                        <p>Experimental</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 style="color: var(--text-secondary);">2</h3>
-                        <p>Research</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="filters" style="margin-top: 20px;">
-                <h3>By Risk Level</h3>
-                <div class="stats-grid" style="margin-top: 15px;">
-                    <div class="stat-card">
-                        <h3 style="color: var(--success);">20</h3>
-                        <p>Low Risk</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 style="color: var(--warning);">14</h3>
-                        <p>Medium Risk</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3 style="color: var(--danger);">6</h3>
-                        <p>High Risk</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="filters" style="margin-top: 20px;">
-                <h3>By Protocol Support</h3>
-                <div class="stats-grid" style="margin-top: 15px;">
-                    <div class="stat-card">
-                        <h3>18</h3>
-                        <p>MCP Support</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>8</h3>
-                        <p>A2A Support</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>28</h3>
-                        <p>Function Calling</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>20</h3>
-                        <p>Multimodal</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="filters" style="margin-top: 20px;">
-                <h3>Top Frameworks by GitHub Stars</h3>
-                <div class="table-container" style="margin-top: 15px;">
+            <div class="filters" style="margin-top: 16px;">
+                <h3>Top 15 by GitHub Stars</h3>
+                <div class="table-container" style="margin-top: 12px;">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Framework</th>
-                                <th>Stars</th>
-                                <th>Category</th>
-                            </tr>
+                            <tr><th>#</th><th>Framework</th><th>Stars</th><th>Category</th><th>License</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>1</td><td>LangChain</td><td>122,488</td><td>Core Orchestration</td></tr>
-                            <tr><td>2</td><td>Gemini CLI</td><td>88,925</td><td>Coding Agent</td></tr>
-                            <tr><td>3</td><td>BrowserUse</td><td>74,100</td><td>Browser Automation</td></tr>
-                            <tr><td>4</td><td>Firecrawl</td><td>71,705</td><td>Web Scraping</td></tr>
-                            <tr><td>5</td><td>RAGFlow</td><td>70,536</td><td>RAG Engine</td></tr>
-                            <tr><td>6</td><td>OpenHands</td><td>65,900</td><td>Coding Agent</td></tr>
-                            <tr><td>7</td><td>MetaGPT</td><td>61,926</td><td>Multi-Agent</td></tr>
-                            <tr><td>8</td><td>AutoGen</td><td>52,767</td><td>Multi-Agent</td></tr>
-                            <tr><td>9</td><td>AnythingLLM</td><td>52,638</td><td>RAG Platform</td></tr>
-                            <tr><td>10</td><td>LangFlow</td><td>50,000</td><td>Visual/Low-Code</td></tr>
+                            <tr><td>1</td><td>LangChain</td><td>122k</td><td>Core Orch</td><td class="license-permissive">MIT</td></tr>
+                            <tr><td>2</td><td>Gemini CLI</td><td>89k</td><td>Coding</td><td class="license-permissive">Apache</td></tr>
+                            <tr><td>3</td><td>BrowserUse</td><td>74k</td><td>Browser</td><td class="license-permissive">MIT</td></tr>
+                            <tr><td>4</td><td>Firecrawl</td><td>72k</td><td>Web Scrape</td><td class="license-copyleft">AGPL</td></tr>
+                            <tr><td>5</td><td>RAGFlow</td><td>71k</td><td>RAG</td><td class="license-permissive">Apache</td></tr>
+                            <tr><td>6</td><td>n8n</td><td>69k</td><td>Workflow</td><td class="license-copyleft">Fair</td></tr>
+                            <tr><td>7</td><td>OpenHands</td><td>66k</td><td>Coding</td><td class="license-permissive">MIT</td></tr>
+                            <tr><td>8</td><td>MetaGPT</td><td>62k</td><td>Multi-Agent</td><td class="license-permissive">MIT</td></tr>
+                            <tr><td>9</td><td>AutoGen</td><td>53k</td><td>Multi-Agent</td><td class="license-permissive">MIT</td></tr>
+                            <tr><td>10</td><td>AnythingLLM</td><td>53k</td><td>RAG</td><td class="license-permissive">MIT</td></tr>
+                            <tr><td>11</td><td>LangFlow</td><td>50k</td><td>Visual</td><td class="license-permissive">MIT</td></tr>
+                            <tr><td>12</td><td>LlamaIndex</td><td>46k</td><td>RAG</td><td class="license-permissive">MIT</td></tr>
+                            <tr><td>13</td><td>Mem0</td><td>45k</td><td>Memory</td><td class="license-permissive">Apache</td></tr>
+                            <tr><td>14</td><td>CrewAI</td><td>42k</td><td>Multi-Agent</td><td class="license-permissive">MIT</td></tr>
+                            <tr><td>15</td><td>Daytona</td><td>41k</td><td>Sandbox</td><td class="license-permissive">Apache</td></tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+            
+            <div class="filters" style="margin-top: 16px;">
+                <h3>By License</h3>
+                <div class="stats-grid" style="margin-top: 12px;">
+                    <div class="stat-card"><h3 style="color: var(--success);">32</h3><p>MIT</p></div>
+                    <div class="stat-card"><h3 style="color: var(--success);">24</h3><p>Apache</p></div>
+                    <div class="stat-card"><h3 style="color: var(--warning);">2</h3><p>BSL/AGPL</p></div>
+                    <div class="stat-card"><h3 style="color: var(--text-secondary);">6</h3><p>Commercial</p></div>
+                </div>
+            </div>
+            
+            <div class="filters" style="margin-top: 16px;">
+                <h3>By Production Readiness</h3>
+                <div class="stats-grid" style="margin-top: 12px;">
+                    <div class="stat-card"><h3 style="color: var(--success);">35</h3><p>Production</p></div>
+                    <div class="stat-card"><h3 style="color: var(--warning);">18</h3><p>Growing</p></div>
+                    <div class="stat-card"><h3 style="color: var(--danger);">8</h3><p>Experimental</p></div>
+                    <div class="stat-card"><h3 style="color: var(--text-secondary);">3</h3><p>Deprecated</p></div>
                 </div>
             </div>
         </div>
     </div>
     
     <script>
-        // Framework data
         const frameworks = [
-            {name: "LangChain", category: "Core Orchestration", stars: 122488, url: "https://github.com/langchain-ai/langchain", funding: "$125M Series B", language: "Python", allLang: "Python, JavaScript", mcp: "Yes", a2a: "Yes", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "General orchestration, RAG, prototyping, chatbots", limitations: "Over-engineered for simple tasks, API churn", docs: "https://python.langchain.com"},
-            {name: "LangGraph", category: "Core Orchestration", stars: 22446, url: "https://github.com/langchain-ai/langgraph", funding: "LangChain", language: "Python", allLang: "Python, JavaScript", mcp: "Yes", a2a: "Yes", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "Stateful multi-agent, complex workflows, cycles/loops", limitations: "Steeper learning curve, requires graph thinking", docs: "https://langchain-ai.github.io/langgraph"},
-            {name: "LangSmith", category: "Observability", stars: 0, url: "", funding: "LangChain", language: "SaaS", allLang: "SaaS", mcp: "N/A", a2a: "N/A", funcCall: "N/A", multimodal: "N/A", voice: "N/A", production: "Yes", risk: "Low", setup: 5, useCases: "Tracing, evaluation, monitoring, prompt management", limitations: "Paid tiers can be expensive", docs: "https://docs.smith.langchain.com"},
-            {name: "Semantic Kernel", category: "Core Orchestration", stars: 26898, url: "https://github.com/microsoft/semantic-kernel", funding: "Microsoft", language: "C#", allLang: "C#, Python, Java", mcp: "Yes", a2a: "Partial", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "Enterprise .NET, Microsoft ecosystem, Copilot", limitations: "Azure-centric, .NET bias", docs: "https://learn.microsoft.com/semantic-kernel"},
-            {name: "Google ADK", category: "Core Orchestration", stars: 16635, url: "https://github.com/google/adk-python", funding: "Google", language: "Python", allLang: "Python, TypeScript, Go, Java", mcp: "Yes", a2a: "Yes", funcCall: "Yes", multimodal: "Yes", voice: "Yes", production: "Yes", risk: "Low", setup: 10, useCases: "Google Cloud, Gemini models, multi-agent", limitations: "Early stage, Google ecosystem bias", docs: "https://google.github.io/adk-docs"},
-            {name: "OpenAI Agents SDK", category: "Core Orchestration", stars: 0, url: "https://github.com/openai/openai-agents-python", funding: "OpenAI", language: "Python", allLang: "Python, TypeScript", mcp: "Yes", a2a: "Partial", funcCall: "Yes", multimodal: "Yes", voice: "Yes", production: "Yes", risk: "Low", setup: 5, useCases: "OpenAI-native development, guardrails, sessions", limitations: "OpenAI lock-in", docs: "https://openai.github.io/openai-agents-python"},
-            {name: "CrewAI", category: "Multi-Agent", stars: 41677, url: "https://github.com/crewAIInc/crewAI", funding: "Undisclosed", language: "Python", allLang: "Python", mcp: "Yes", a2a: "Yes", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Medium", setup: 15, useCases: "Role-based teams, multi-agent collaboration", limitations: "Higher learning curve, model compatibility issues", docs: "https://docs.crewai.com"},
-            {name: "AutoGen", category: "Multi-Agent", stars: 52767, url: "https://github.com/microsoft/autogen", funding: "Microsoft Research", language: "Python", allLang: "Python", mcp: "Partial", a2a: "Partial", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Experimental", risk: "Medium", setup: 10, useCases: "Research, multi-agent conversation, code execution", limitations: "Fork drama (AG2), experimental status", docs: "https://microsoft.github.io/autogen"},
-            {name: "Agno", category: "Multi-Agent", stars: 36266, url: "https://github.com/agno-agi/agno", funding: "Undisclosed", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Medium", setup: 5, useCases: "Fast multi-agent, Teams, Workflows, AgentOS", limitations: "No MCP/A2A yet, undisclosed funding", docs: "https://docs.agno.com"},
-            {name: "Letta", category: "Multi-Agent", stars: 20173, url: "https://github.com/letta-ai/letta", funding: "$10M Seed", language: "Python", allLang: "Python, TypeScript", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Growing", risk: "Medium", setup: 10, useCases: "Persistent memory agents, self-improving", limitations: "Complex for simple use cases", docs: "https://docs.letta.com"},
-            {name: "LlamaIndex", category: "RAG & Data", stars: 45970, url: "https://github.com/run-llama/llama_index", funding: "VC-backed", language: "Python", allLang: "Python", mcp: "Partial", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "Data ingestion, RAG, knowledge graphs, 160+ connectors", limitations: "Overkill for simple RAG", docs: "https://docs.llamaindex.ai"},
-            {name: "Haystack", category: "RAG & Data", stars: 23704, url: "https://github.com/deepset-ai/haystack", funding: "$18M Series A", language: "Python", allLang: "Python", mcp: "Partial", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "Enterprise RAG, document QA, production pipelines", limitations: "RAG-focused only", docs: "https://docs.haystack.deepset.ai"},
-            {name: "PydanticAI", category: "Lightweight", stars: 13928, url: "https://github.com/pydantic/pydantic-ai", funding: "Pydantic team", language: "Python", allLang: "Python", mcp: "Yes", a2a: "Yes", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Growing", risk: "Medium", setup: 5, useCases: "Type-safe agents, Pydantic validation", limitations: "Newer framework, smaller community", docs: "https://ai.pydantic.dev"},
-            {name: "DSPy", category: "Lightweight", stars: 30971, url: "https://github.com/stanfordnlp/dspy", funding: "Stanford NLP", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Research", risk: "High", setup: 10, useCases: "Prompt optimization, programmatic LLM control", limitations: "Academic focus, steep learning curve", docs: "https://dspy.ai"},
-            {name: "Smolagents", category: "Lightweight", stars: 24500, url: "https://github.com/huggingface/smolagents", funding: "Hugging Face", language: "Python", allLang: "Python", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Growing", risk: "Medium", setup: 5, useCases: "Lightweight agents, code execution, HF ecosystem", limitations: "Security concerns with code execution", docs: "https://huggingface.co/docs/smolagents"},
-            {name: "Mastra", category: "Lightweight", stars: 18952, url: "https://github.com/mastra-ai/mastra", funding: "Undisclosed", language: "TypeScript", allLang: "TypeScript", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Growing", risk: "High", setup: 10, useCases: "Full-stack TypeScript, workflows, MCP authoring", limitations: "Not true OSS license, TS-only", docs: "https://mastra.ai/docs"},
-            {name: "VoltAgent", category: "Lightweight", stars: 4300, url: "https://github.com/VoltAgent/voltagent", funding: "Undisclosed", language: "TypeScript", allLang: "TypeScript", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Early", risk: "High", setup: 10, useCases: "TypeScript agents, built-in observability", limitations: "Very new, small community", docs: "https://voltagent.dev"},
-            {name: "Genkit", category: "Lightweight", stars: 5200, url: "https://github.com/firebase/genkit", funding: "Google", language: "TypeScript", allLang: "TypeScript, Go, Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "Firebase apps, simple AI features, flows", limitations: "Less powerful than ADK", docs: "https://genkit.dev"},
-            {name: "Instructor", category: "Utility", stars: 12000, url: "https://github.com/instructor-ai/instructor", funding: "Undisclosed", language: "Python", allLang: "Python, TypeScript, Ruby, Go", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Yes", risk: "Low", setup: 5, useCases: "Structured extraction, Pydantic validation", limitations: "Not a full agent framework", docs: "https://python.useinstructor.com"},
-            {name: "Outlines", category: "Utility", stars: 13100, url: "https://github.com/dottxt-ai/outlines", funding: "dottxt", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Yes", risk: "Low", setup: 5, useCases: "Constrained generation, guaranteed JSON", limitations: "Generation control only", docs: "https://dottxt-ai.github.io/outlines"},
-            {name: "Guidance", category: "Utility", stars: 21000, url: "https://github.com/guidance-ai/guidance", funding: "Microsoft", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "Output control, constrained generation", limitations: "Prompt control only", docs: "https://github.com/guidance-ai/guidance"},
-            {name: "Marvin", category: "Utility", stars: 6000, url: "https://github.com/prefecthq/marvin", funding: "Prefect", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Growing", risk: "Medium", setup: 5, useCases: "AI functions (cast/classify/extract)", limitations: "Less agent-focused", docs: "https://askmarvin.ai"},
-            {name: "AWS Bedrock Agents", category: "Cloud Platform", stars: 0, url: "", funding: "AWS", language: "Managed", allLang: "Managed", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "AWS-native, managed agents, RAG", limitations: "AWS lock-in", docs: "https://aws.amazon.com/bedrock/agents"},
-            {name: "AWS Strands SDK", category: "Cloud Platform", stars: 4700, url: "https://github.com/strands-agents/sdk-python", funding: "AWS", language: "Python", allLang: "Python", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "Yes", production: "Growing", risk: "Medium", setup: 10, useCases: "AWS ecosystem, model-driven agents", limitations: "Newer SDK, smaller community", docs: "https://strandsagents.com"},
-            {name: "Azure AI Foundry", category: "Cloud Platform", stars: 0, url: "", funding: "Microsoft", language: "Managed", allLang: "Managed", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "Azure-native, enterprise agents", limitations: "Azure lock-in", docs: "https://learn.microsoft.com/azure/ai-services/agents"},
-            {name: "Vertex AI Agents", category: "Cloud Platform", stars: 0, url: "", funding: "Google", language: "Managed", allLang: "Managed", mcp: "Yes", a2a: "Yes", funcCall: "Yes", multimodal: "Yes", voice: "Yes", production: "Yes", risk: "Low", setup: 15, useCases: "GCP-native, Agent Engine, A2A support", limitations: "GCP lock-in", docs: "https://cloud.google.com/vertex-ai/docs/agents"},
-            {name: "LangFlow", category: "Visual/Low-Code", stars: 50000, url: "https://github.com/langflow-ai/langflow", funding: "LangChain", language: "Visual", allLang: "Python, Visual", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "Visual prototyping, drag-and-drop", limitations: "Complex logic gets cluttered", docs: "https://langflow.org"},
-            {name: "n8n AI Agents", category: "Visual/Low-Code", stars: 0, url: "https://github.com/n8n-io/n8n", funding: "Commercial", language: "Visual", allLang: "Visual", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "Workflow automation, 500+ integrations", limitations: "Manual LLM state handling", docs: "https://docs.n8n.io/advanced-ai"},
-            {name: "SuperAGI", category: "Visual/Low-Code", stars: 17000, url: "https://github.com/TransformerOptimus/SuperAGI", funding: "Undisclosed", language: "Python", allLang: "Python, GUI", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Growing", risk: "Medium", setup: 15, useCases: "GUI agent management, toolkit marketplace", limitations: "Smaller community", docs: "https://superagi.com/docs"},
-            {name: "Lindy", category: "Visual/Low-Code", stars: 0, url: "", funding: "Commercial", language: "No-code", allLang: "No-code", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "Yes", production: "Yes", risk: "Low", setup: 5, useCases: "Business automation, non-technical users", limitations: "Commercial only", docs: "https://lindy.ai"},
-            {name: "Aider", category: "Coding Agent", stars: 39100, url: "https://github.com/Aider-AI/aider", funding: "Undisclosed", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 5, useCases: "Terminal pair programming, Git integration", limitations: "Terminal-only", docs: "https://aider.chat"},
-            {name: "OpenHands", category: "Coding Agent", stars: 65900, url: "https://github.com/All-Hands-AI/OpenHands", funding: "Undisclosed", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "Full dev platform, IDE experience", limitations: "Resource intensive", docs: "https://docs.all-hands.dev"},
-            {name: "MCP (Protocol)", category: "Protocol", stars: 0, url: "https://github.com/modelcontextprotocol", funding: "Anthropic", language: "Protocol", allLang: "All", mcp: "Yes", a2a: "N/A", funcCall: "N/A", multimodal: "N/A", voice: "N/A", production: "Standard", risk: "Low", setup: 0, useCases: "Agent-to-tool connection, resource access", limitations: "Protocol only", docs: "https://modelcontextprotocol.io"},
-            {name: "A2A (Protocol)", category: "Protocol", stars: 21200, url: "https://github.com/google/A2A", funding: "Linux Foundation", language: "Protocol", allLang: "All", mcp: "N/A", a2a: "Yes", funcCall: "N/A", multimodal: "N/A", voice: "N/A", production: "Standard", risk: "Low", setup: 0, useCases: "Agent-to-agent communication", limitations: "Newer protocol", docs: "https://a2a-protocol.org"},
-            {name: "Ray", category: "Infrastructure", stars: 35000, url: "https://github.com/ray-project/ray", funding: "Anyscale", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "N/A", multimodal: "N/A", voice: "N/A", production: "Yes", risk: "Low", setup: 30, useCases: "Distributed agent execution, scaling", limitations: "Infrastructure only", docs: "https://docs.ray.io"},
-            {name: "ZenML", category: "Infrastructure", stars: 0, url: "https://github.com/zenml-io/zenml", funding: "VC-backed", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "N/A", multimodal: "N/A", voice: "N/A", production: "Yes", risk: "Low", setup: 20, useCases: "MLOps/LLMOps pipelines, governance", limitations: "Overkill for simple agents", docs: "https://docs.zenml.io"},
-            {name: "Salesforce Agentforce", category: "Enterprise Platform", stars: 0, url: "", funding: "Salesforce", language: "Commercial", allLang: "Commercial", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "Yes", production: "Yes", risk: "Low", setup: 0, useCases: "Enterprise CRM, sales/service agents", limitations: "Salesforce lock-in", docs: "https://salesforce.com/agentforce"},
-            {name: "LiveKit Agents", category: "Voice/Realtime", stars: 0, url: "https://github.com/livekit/agents", funding: "LiveKit", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "Yes", production: "Yes", risk: "Low", setup: 15, useCases: "Real-time voice/video, WebRTC", limitations: "Specialized for realtime only", docs: "https://docs.livekit.io/agents"},
-            {name: "CAMEL-AI", category: "Research", stars: 0, url: "https://github.com/camel-ai/camel", funding: "Academic", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Research", risk: "High", setup: 15, useCases: "Multi-agent societies, role-playing, research", limitations: "Academic focus", docs: "https://camel-ai.org"},
-            {name: "BrowserUse", category: "Browser Automation", stars: 74100, url: "https://github.com/browser-use/browser-use", funding: "VC-Backed", language: "Python", allLang: "Python", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "Web automation, form filling, e-commerce automation, scraping", limitations: "Chrome memory intensive, requires browser infrastructure at scale", docs: "https://docs.browser-use.com"},
-            {name: "Langroid", category: "Multi-Agent", stars: 3800, url: "https://github.com/langroid/langroid", funding: "CMU/UW-Madison", language: "Python", allLang: "Python", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "Multi-agent RAG, complex reasoning, SQL/document chat", limitations: "Primarily async patterns, limited non-OpenAI testing", docs: "https://langroid.github.io/langroid"},
-            {name: "ControlFlow", category: "Workflow Orchestration", stars: 1400, url: "https://github.com/PrefectHQ/ControlFlow", funding: "Prefect (VC-Backed)", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Archived", risk: "High", setup: 10, useCases: "Task-centric AI workflows, structured output generation", limitations: "ARCHIVED - Merged into Marvin, no longer maintained", docs: "https://controlflow.ai"},
-            {name: "BeeAI Framework", category: "Enterprise Multi-Agent", stars: 3000, url: "https://github.com/i-am-bee/beeai-framework", funding: "IBM (Linux Foundation)", language: "Python", allLang: "Python, TypeScript", mcp: "Yes", a2a: "Yes", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "Enterprise multi-agent, production AI workflows, constraint-enforced agents", limitations: "Newer framework, enterprise-focused documentation", docs: "https://framework.beeai.dev"},
-            {name: "Julep", category: "Stateful Agents", stars: 6600, url: "https://github.com/julep-ai/julep", funding: "VC-Backed Startup", language: "Python", allLang: "Python, Node.js/TypeScript", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Growing", risk: "Medium", setup: 20, useCases: "Stateful AI agents with memory, long-running workflows, session-based apps", limitations: "Cloud-first architecture, self-hosting complexity", docs: "https://docs.julep.ai"},
-            {name: "Burr", category: "State Machine", stars: 1900, url: "https://github.com/apache/burr", funding: "Apache Foundation", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "State machine agents, chatbots, simulations, decision-making apps", limitations: "Python-only, limited cloud deployment options", docs: "https://burr.apache.org"},
-            {name: "Gemini CLI", category: "Coding Agent", stars: 88925, url: "https://github.com/google-gemini/gemini-cli", funding: "Google", language: "TypeScript", allLang: "TypeScript", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 5, useCases: "Terminal AI agent, code generation, Gemini-powered CLI, MCP support", limitations: "Google/Gemini ecosystem only, requires API key", docs: "https://github.com/google-gemini/gemini-cli"},
-            {name: "Firecrawl", category: "Web Scraping", stars: 71705, url: "https://github.com/mendableai/firecrawl", funding: "VC-Backed", language: "TypeScript", allLang: "TypeScript", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "Web scraping for AI, LLM-ready markdown, structured data extraction", limitations: "API costs at scale, rate limiting on free tier", docs: "https://firecrawl.dev"},
-            {name: "RAGFlow", category: "RAG Engine", stars: 70536, url: "https://github.com/infiniflow/ragflow", funding: "Infiniflow", language: "Python", allLang: "Python", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "Enterprise RAG, GraphRAG, document processing, knowledge base", limitations: "Complex setup, resource intensive", docs: "https://ragflow.io"},
-            {name: "MetaGPT", category: "Multi-Agent", stars: 61926, url: "https://github.com/geekan/MetaGPT", funding: "Community/VC", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Growing", risk: "Medium", setup: 15, useCases: "AI software company, multi-agent development, code generation", limitations: "High token costs, complex orchestration", docs: "https://docs.deepwisdom.ai"},
-            {name: "AnythingLLM", category: "RAG Platform", stars: 52638, url: "https://github.com/Mintplex-Labs/anything-llm", funding: "Mintplex Labs", language: "JavaScript", allLang: "JavaScript", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "Desktop RAG, local LLMs, document chat, no-code AI", limitations: "Desktop-focused, limited enterprise features", docs: "https://anythingllm.com"},
-            {name: "Mem0", category: "Memory Infrastructure", stars: 44762, url: "https://github.com/mem0ai/mem0", funding: "VC-Backed", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "Memory layer for AI agents, persistent context, user preferences", limitations: "Not a full agent framework, memory-only", docs: "https://mem0.ai"},
-            {name: "Daytona", category: "Code Sandbox", stars: 40955, url: "https://github.com/daytonaio/daytona", funding: "VC-Backed", language: "TypeScript", allLang: "TypeScript", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "Secure code execution, AI sandboxing, dev environments", limitations: "Infrastructure-focused, not agent orchestration", docs: "https://daytona.io"},
-            {name: "Composio", category: "Tool Integration", stars: 26236, url: "https://github.com/ComposioHQ/composio", funding: "VC-Backed", language: "TypeScript", allLang: "TypeScript, Python", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "100+ integrations for agents, function calling, tool management", limitations: "Integration platform, not agent framework", docs: "https://composio.dev"},
-            {name: "Kotaemon", category: "RAG UI", stars: 24795, url: "https://github.com/Cinnamon/kotaemon", funding: "Cinnamon AI", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "RAG chat interface, GraphRAG, document QA, self-hostable", limitations: "UI-focused, limited agent capabilities", docs: "https://github.com/Cinnamon/kotaemon"},
-            {name: "OpenAI Swarm", category: "Multi-Agent", stars: 20741, url: "https://github.com/openai/swarm", funding: "OpenAI", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Deprecated", risk: "High", setup: 10, useCases: "Educational multi-agent, lightweight orchestration, handoffs", limitations: "DEPRECATED - Use OpenAI Agents SDK instead", docs: "https://github.com/openai/swarm"},
-            {name: "Activepieces", category: "Workflow Automation", stars: 20080, url: "https://github.com/activepieces/activepieces", funding: "VC-Backed", language: "TypeScript", allLang: "TypeScript", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Yes", risk: "Low", setup: 10, useCases: "AI workflow automation, 400 MCP servers, Zapier alternative", limitations: "Workflow-focused, not agent-first", docs: "https://activepieces.com"},
-            {name: "DeerFlow", category: "Deep Research", stars: 18853, url: "https://github.com/bytedance/deer-flow", funding: "ByteDance", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Growing", risk: "Medium", setup: 15, useCases: "Deep research agents, web search, crawling, Python execution", limitations: "ByteDance ecosystem, newer framework", docs: "https://github.com/bytedance/deer-flow"},
-            {name: "Suna", category: "General Agent", stars: 18910, url: "https://github.com/kortix-ai/suna", funding: "Kortix AI", language: "TypeScript", allLang: "TypeScript", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Growing", risk: "Medium", setup: 15, useCases: "General-purpose agent platform, agent training, management", limitations: "Newer platform, smaller community", docs: "https://kortix.ai"},
-            {name: "SWE-agent", category: "Coding Agent", stars: 18106, url: "https://github.com/SWE-agent/SWE-agent", funding: "Princeton NLP", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Research", risk: "Medium", setup: 20, useCases: "GitHub issue fixing, SWE-bench SOTA, security research", limitations: "Research-focused, requires fine-tuning for production", docs: "https://swe-agent.com"},
-            {name: "Parlant", category: "Customer Service", stars: 16799, url: "https://github.com/emcie-co/parlant", funding: "Emcie", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "Customer service agents, behavioral control, production-ready", limitations: "Specialized for customer service only", docs: "https://parlant.io"},
-            {name: "AgentScope", category: "Multi-Agent", stars: 14871, url: "https://github.com/modelscope/agentscope", funding: "Alibaba", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 15, useCases: "Agent-oriented programming, distributed agents, ModelScope ecosystem", limitations: "Alibaba ecosystem, less Western adoption", docs: "https://modelscope.github.io/agentscope"},
-            {name: "PocketFlow", category: "Meta-Framework", stars: 9342, url: "https://github.com/The-Pocket/PocketFlow", funding: "Community", language: "Python", allLang: "Python", mcp: "No", a2a: "No", funcCall: "Yes", multimodal: "No", voice: "No", production: "Growing", risk: "Medium", setup: 5, useCases: "100-line LLM framework, agents building agents, minimalist", limitations: "Very minimal, limited features by design", docs: "https://github.com/The-Pocket/PocketFlow"},
-            {name: "Microsoft 365 Agents", category: "Enterprise Platform", stars: 630, url: "https://github.com/microsoft/Agents", funding: "Microsoft", language: "PowerShell", allLang: "PowerShell, C#, TypeScript", mcp: "Yes", a2a: "No", funcCall: "Yes", multimodal: "Yes", voice: "No", production: "Yes", risk: "Low", setup: 20, useCases: "Teams agents, Copilot extensions, M365 ecosystem", limitations: "Microsoft 365 ecosystem only, enterprise-focused", docs: "https://learn.microsoft.com/microsoft-365-copilot/extensibility"}
+            {name: "LangChain", category: "Core Orchestration", stars: 122488, url: "https://github.com/langchain-ai/langchain", funding: "$125M Series B", language: "Python", mcp: "Yes", a2a: "Yes", multimodal: "Yes", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "Most popular LLM orchestration framework with extensive ecosystem", bestFor: "General orchestration, RAG, prototyping, chatbots", limitations: "Over-engineered for simple tasks, API churn"},
+            {name: "LangGraph", category: "Core Orchestration", stars: 22446, url: "https://github.com/langchain-ai/langgraph", funding: "LangChain", language: "Python", mcp: "Yes", a2a: "Yes", multimodal: "Yes", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "Stateful multi-agent graphs with cycles and persistence", bestFor: "Complex workflows, cycles, human-in-the-loop", limitations: "Steeper learning curve, requires graph thinking"},
+            {name: "LangSmith", category: "Observability", stars: 0, url: "https://smith.langchain.com", funding: "LangChain", language: "SaaS", mcp: "N/A", a2a: "N/A", multimodal: "N/A", production: "Yes", risk: "Low", license: "Commercial", activity: "Active", description: "LLM observability platform for tracing, eval, monitoring", bestFor: "Debugging, evaluation, prompt management", limitations: "Paid tiers expensive"},
+            {name: "Semantic Kernel", category: "Core Orchestration", stars: 26898, url: "https://github.com/microsoft/semantic-kernel", funding: "Microsoft", language: "C#", mcp: "Yes", a2a: "Partial", multimodal: "Yes", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "Microsoft's enterprise SDK for LLM app development", bestFor: "Enterprise .NET, Microsoft/Azure ecosystem", limitations: "Azure-centric, .NET bias"},
+            {name: "Google ADK", category: "Core Orchestration", stars: 16635, url: "https://github.com/google/adk-python", funding: "Google", language: "Python", mcp: "Yes", a2a: "Yes", multimodal: "Yes", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Google's Agent Development Kit for Gemini models", bestFor: "Google Cloud, Gemini, multi-agent", limitations: "Early stage, Google ecosystem bias"},
+            {name: "OpenAI Agents SDK", category: "Core Orchestration", stars: 0, url: "https://github.com/openai/openai-agents-python", funding: "OpenAI", language: "Python", mcp: "Yes", a2a: "Partial", multimodal: "Yes", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Official OpenAI SDK for agents with guardrails", bestFor: "OpenAI-native, sessions, guardrails", limitations: "OpenAI lock-in"},
+            {name: "CrewAI", category: "Multi-Agent", stars: 41677, url: "https://github.com/crewAIInc/crewAI", funding: "VC-backed", language: "Python", mcp: "Yes", a2a: "Yes", multimodal: "Yes", production: "Yes", risk: "Medium", license: "MIT", activity: "Active", description: "Role-based multi-agent framework for team collaboration", bestFor: "Role-based teams, agent collaboration", limitations: "Higher learning curve, model compatibility"},
+            {name: "AutoGen", category: "Multi-Agent", stars: 52767, url: "https://github.com/microsoft/autogen", funding: "Microsoft", language: "Python", mcp: "Partial", a2a: "Partial", multimodal: "Yes", production: "Experimental", risk: "Medium", license: "MIT", activity: "Active", description: "Microsoft's multi-agent conversation framework", bestFor: "Research, multi-agent conversation, code exec", limitations: "Fork drama (AG2), experimental"},
+            {name: "Agno", category: "Multi-Agent", stars: 36266, url: "https://github.com/agno-agi/agno", funding: "VC-backed", language: "Python", mcp: "No", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Medium", license: "MIT", activity: "Active", description: "Fast multi-agent framework with Teams and Workflows", bestFor: "Performance-critical multi-agent, AgentOS", limitations: "No MCP/A2A yet"},
+            {name: "Letta", category: "Multi-Agent", stars: 20173, url: "https://github.com/letta-ai/letta", funding: "$10M Seed", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Growing", risk: "Medium", license: "Apache-2.0", activity: "Active", description: "Agents with persistent memory that self-improve", bestFor: "Persistent memory, self-improving agents", limitations: "Complex for simple use cases"},
+            {name: "MetaGPT", category: "Multi-Agent", stars: 61926, url: "https://github.com/geekan/MetaGPT", funding: "Community/VC", language: "Python", mcp: "No", a2a: "No", multimodal: "Yes", production: "Growing", risk: "Medium", license: "MIT", activity: "Active", description: "AI software company simulation with role-based agents", bestFor: "AI software development, code generation", limitations: "High token costs, complex orchestration"},
+            {name: "OpenAI Swarm", category: "Multi-Agent", stars: 20741, url: "https://github.com/openai/swarm", funding: "OpenAI", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Deprecated", risk: "High", license: "MIT", activity: "Archived", description: "DEPRECATED: Educational multi-agent framework", bestFor: "Learning only - do not use in production", limitations: "DEPRECATED - Use OpenAI Agents SDK"},
+            {name: "AgentScope", category: "Multi-Agent", stars: 14871, url: "https://github.com/modelscope/agentscope", funding: "Alibaba", language: "Python", mcp: "No", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Alibaba's distributed multi-agent platform", bestFor: "Distributed agents, ModelScope ecosystem", limitations: "Alibaba ecosystem, less Western adoption"},
+            {name: "Langroid", category: "Multi-Agent", stars: 3800, url: "https://github.com/langroid/langroid", funding: "CMU/UW", language: "Python", mcp: "Yes", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "Academic multi-agent RAG with complex reasoning", bestFor: "Multi-agent RAG, SQL/document chat", limitations: "Async patterns, limited non-OpenAI testing"},
+            {name: "LlamaIndex", category: "RAG & Data", stars: 45970, url: "https://github.com/run-llama/llama_index", funding: "VC-backed", language: "Python", mcp: "Partial", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "Data framework with 160+ connectors for RAG", bestFor: "Data ingestion, RAG, knowledge graphs", limitations: "Overkill for simple RAG"},
+            {name: "Haystack", category: "RAG & Data", stars: 23704, url: "https://github.com/deepset-ai/haystack", funding: "$18M Series A", language: "Python", mcp: "Partial", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Enterprise RAG framework for document QA", bestFor: "Enterprise RAG, document QA, production", limitations: "RAG-focused only"},
+            {name: "RAGFlow", category: "RAG Engine", stars: 70536, url: "https://github.com/infiniflow/ragflow", funding: "Infiniflow", language: "Python", mcp: "Yes", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Enterprise RAG engine with GraphRAG, deep parsing", bestFor: "Enterprise RAG, GraphRAG, document processing", limitations: "Complex setup, resource intensive"},
+            {name: "AnythingLLM", category: "RAG Platform", stars: 52638, url: "https://github.com/Mintplex-Labs/anything-llm", funding: "Mintplex", language: "JavaScript", mcp: "Yes", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "Desktop RAG platform with local LLM support", bestFor: "Desktop RAG, local LLMs, no-code AI", limitations: "Desktop-focused, limited enterprise"},
+            {name: "Kotaemon", category: "RAG UI", stars: 24795, url: "https://github.com/Cinnamon/kotaemon", funding: "Cinnamon AI", language: "Python", mcp: "No", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Self-hosted RAG UI with GraphRAG support", bestFor: "RAG chat interface, GraphRAG, self-hosting", limitations: "UI-focused, limited agent capabilities"},
+            {name: "PydanticAI", category: "Lightweight", stars: 13928, url: "https://github.com/pydantic/pydantic-ai", funding: "Pydantic", language: "Python", mcp: "Yes", a2a: "Yes", multimodal: "Yes", production: "Growing", risk: "Medium", license: "MIT", activity: "Active", description: "Type-safe agents with Pydantic validation", bestFor: "Type-safe agents, structured output", limitations: "Newer framework, smaller community"},
+            {name: "DSPy", category: "Lightweight", stars: 30971, url: "https://github.com/stanfordnlp/dspy", funding: "Stanford NLP", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Research", risk: "High", license: "MIT", activity: "Active", description: "Programmatic prompt optimization framework", bestFor: "Prompt optimization, research", limitations: "Academic focus, steep learning curve"},
+            {name: "Smolagents", category: "Lightweight", stars: 24500, url: "https://github.com/huggingface/smolagents", funding: "Hugging Face", language: "Python", mcp: "Yes", a2a: "No", multimodal: "Yes", production: "Growing", risk: "Medium", license: "Apache-2.0", activity: "Active", description: "Minimal agent framework from Hugging Face", bestFor: "Lightweight agents, HF ecosystem, code exec", limitations: "Security concerns with code execution"},
+            {name: "Mastra", category: "Lightweight", stars: 18952, url: "https://github.com/mastra-ai/mastra", funding: "VC-backed", language: "TypeScript", mcp: "Yes", a2a: "No", multimodal: "Yes", production: "Growing", risk: "High", license: "Apache-2.0", activity: "Active", description: "Full-stack TypeScript agent framework with MCP", bestFor: "TypeScript agents, workflows, MCP authoring", limitations: "Not true OSS license, TS-only"},
+            {name: "VoltAgent", category: "Lightweight", stars: 4300, url: "https://github.com/VoltAgent/voltagent", funding: "Startup", language: "TypeScript", mcp: "Yes", a2a: "No", multimodal: "No", production: "Early", risk: "High", license: "BSL-1.1", activity: "Active", description: "TypeScript agents with built-in observability", bestFor: "TypeScript agents, observability", limitations: "Very new, restrictive license"},
+            {name: "Genkit", category: "Lightweight", stars: 5200, url: "https://github.com/firebase/genkit", funding: "Google", language: "TypeScript", mcp: "No", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Google's simple AI features for Firebase apps", bestFor: "Firebase apps, simple AI features, flows", limitations: "Less powerful than ADK"},
+            {name: "PocketFlow", category: "Meta-Framework", stars: 9342, url: "https://github.com/The-Pocket/PocketFlow", funding: "Community", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Growing", risk: "Medium", license: "Apache-2.0", activity: "Active", description: "100-line minimalist LLM framework", bestFor: "Learning, agents building agents", limitations: "Very minimal, limited features"},
+            {name: "Instructor", category: "Utility", stars: 12000, url: "https://github.com/instructor-ai/instructor", funding: "Community", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "Structured extraction with Pydantic validation", bestFor: "Structured extraction, retries, validation", limitations: "Not a full agent framework"},
+            {name: "Outlines", category: "Utility", stars: 13100, url: "https://github.com/dottxt-ai/outlines", funding: "dottxt", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Constrained generation with guaranteed JSON", bestFor: "Guaranteed JSON, constrained generation", limitations: "Generation control only"},
+            {name: "Guidance", category: "Utility", stars: 21000, url: "https://github.com/guidance-ai/guidance", funding: "Microsoft", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "Microsoft's prompt templating and control", bestFor: "Output control, constrained generation", limitations: "Prompt control only"},
+            {name: "Marvin", category: "Utility", stars: 6000, url: "https://github.com/prefecthq/marvin", funding: "Prefect", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Growing", risk: "Medium", license: "Apache-2.0", activity: "Active", description: "AI functions: cast, classify, extract, generate", bestFor: "AI functions, quick classification", limitations: "Less agent-focused"},
+            {name: "AWS Bedrock Agents", category: "Cloud Platform", stars: 0, url: "https://aws.amazon.com/bedrock/agents/", funding: "AWS", language: "Managed", mcp: "No", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Commercial", activity: "Active", description: "AWS fully managed agent service", bestFor: "AWS-native, managed agents, RAG", limitations: "AWS lock-in"},
+            {name: "AWS Strands SDK", category: "Cloud Platform", stars: 4700, url: "https://github.com/strands-agents/sdk-python", funding: "AWS", language: "Python", mcp: "Yes", a2a: "No", multimodal: "Yes", production: "Growing", risk: "Medium", license: "Apache-2.0", activity: "Active", description: "AWS model-driven agent SDK with MCP", bestFor: "AWS ecosystem, model-driven agents", limitations: "Newer SDK, smaller community"},
+            {name: "Azure AI Foundry", category: "Cloud Platform", stars: 0, url: "https://azure.microsoft.com/products/ai-foundry", funding: "Microsoft", language: "Managed", mcp: "Yes", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Commercial", activity: "Active", description: "Azure enterprise agent platform", bestFor: "Azure-native, enterprise agents", limitations: "Azure lock-in"},
+            {name: "Vertex AI Agents", category: "Cloud Platform", stars: 0, url: "https://cloud.google.com/vertex-ai/docs/agents", funding: "Google", language: "Managed", mcp: "Yes", a2a: "Yes", multimodal: "Yes", production: "Yes", risk: "Low", license: "Commercial", activity: "Active", description: "GCP managed agents with A2A support", bestFor: "GCP-native, Agent Engine, A2A", limitations: "GCP lock-in"},
+            {name: "LangFlow", category: "Visual/Low-Code", stars: 50000, url: "https://github.com/langflow-ai/langflow", funding: "LangChain", language: "Visual", mcp: "Yes", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "Visual drag-and-drop agent builder", bestFor: "Visual prototyping, drag-and-drop", limitations: "Complex logic gets cluttered"},
+            {name: "n8n AI Agents", category: "Visual/Low-Code", stars: 69000, url: "https://github.com/n8n-io/n8n", funding: "Commercial", language: "Visual", mcp: "No", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "Sustainable", activity: "Active", description: "Workflow automation with 500+ integrations", bestFor: "Workflow automation, 500+ integrations", limitations: "Manual LLM state handling"},
+            {name: "SuperAGI", category: "Visual/Low-Code", stars: 17000, url: "https://github.com/TransformerOptimus/SuperAGI", funding: "VC-backed", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Growing", risk: "Medium", license: "MIT", activity: "Moderate", description: "GUI agent management with toolkit marketplace", bestFor: "GUI agent management, marketplace", limitations: "Smaller community"},
+            {name: "Activepieces", category: "Visual/Low-Code", stars: 20080, url: "https://github.com/activepieces/activepieces", funding: "VC-backed", language: "TypeScript", mcp: "Yes", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "AI workflow automation with 400 MCP servers", bestFor: "AI workflow, Zapier alternative", limitations: "Workflow-focused, not agent-first"},
+            {name: "Lindy", category: "Visual/Low-Code", stars: 0, url: "https://lindy.ai", funding: "Commercial", language: "No-code", mcp: "No", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Commercial", activity: "Active", description: "No-code AI assistants for business", bestFor: "Business automation, non-technical", limitations: "Commercial only"},
+            {name: "Gemini CLI", category: "Coding Agent", stars: 88925, url: "https://github.com/google-gemini/gemini-cli", funding: "Google", language: "TypeScript", mcp: "Yes", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Google's terminal AI agent powered by Gemini", bestFor: "Terminal AI, Gemini-powered CLI, MCP", limitations: "Google/Gemini ecosystem only"},
+            {name: "Aider", category: "Coding Agent", stars: 39100, url: "https://github.com/Aider-AI/aider", funding: "Community", language: "Python", mcp: "No", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Terminal pair programming with Git integration", bestFor: "Terminal pair programming, Git", limitations: "Terminal-only"},
+            {name: "OpenHands", category: "Coding Agent", stars: 65900, url: "https://github.com/All-Hands-AI/OpenHands", funding: "VC-backed", language: "Python", mcp: "No", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "Full development platform and IDE experience", bestFor: "Full dev platform, IDE experience", limitations: "Resource intensive"},
+            {name: "SWE-agent", category: "Coding Agent", stars: 18106, url: "https://github.com/SWE-agent/SWE-agent", funding: "Princeton NLP", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Research", risk: "Medium", license: "MIT", activity: "Active", description: "Princeton's GitHub issue fixing agent", bestFor: "GitHub issue fixing, SWE-bench", limitations: "Research-focused, requires fine-tuning"},
+            {name: "BrowserUse", category: "Browser Automation", stars: 74100, url: "https://github.com/browser-use/browser-use", funding: "VC-backed", language: "Python", mcp: "Yes", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "MIT", activity: "Active", description: "AI-powered web automation and form filling", bestFor: "Web automation, form filling, scraping", limitations: "Chrome memory intensive at scale"},
+            {name: "Firecrawl", category: "Web Scraping", stars: 71705, url: "https://github.com/mendableai/firecrawl", funding: "VC-backed", language: "TypeScript", mcp: "Yes", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "AGPL-3.0", activity: "Active", description: "Web scraping that outputs LLM-ready markdown", bestFor: "Web scraping for AI, structured extraction", limitations: "API costs at scale, AGPL license"},
+            {name: "MCP Protocol", category: "Protocol", stars: 0, url: "https://modelcontextprotocol.io", funding: "Anthropic", language: "Protocol", mcp: "Yes", a2a: "N/A", multimodal: "N/A", production: "Standard", risk: "Low", license: "MIT", activity: "Active", description: "Standard for agent-to-tool connections", bestFor: "Agent-to-tool connection standard", limitations: "Protocol only, not a framework"},
+            {name: "A2A Protocol", category: "Protocol", stars: 21200, url: "https://github.com/google/A2A", funding: "Linux Foundation", language: "Protocol", mcp: "N/A", a2a: "Yes", multimodal: "N/A", production: "Standard", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Standard for agent-to-agent communication", bestFor: "Agent-to-agent communication", limitations: "Newer protocol"},
+            {name: "Ray", category: "Infrastructure", stars: 35000, url: "https://github.com/ray-project/ray", funding: "Anyscale", language: "Python", mcp: "No", a2a: "No", multimodal: "N/A", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Distributed computing for scaling AI workloads", bestFor: "Distributed agent execution, scaling", limitations: "Infrastructure only"},
+            {name: "ZenML", category: "Infrastructure", stars: 5000, url: "https://github.com/zenml-io/zenml", funding: "VC-backed", language: "Python", mcp: "No", a2a: "No", multimodal: "N/A", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "MLOps/LLMOps pipeline orchestration", bestFor: "MLOps/LLMOps pipelines, governance", limitations: "Overkill for simple agents"},
+            {name: "Mem0", category: "Memory Infrastructure", stars: 44762, url: "https://github.com/mem0ai/mem0", funding: "VC-backed", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Memory layer for AI agents with persistence", bestFor: "Memory layer, persistent context", limitations: "Memory-only, not full agent framework"},
+            {name: "Daytona", category: "Code Sandbox", stars: 40955, url: "https://github.com/daytonaio/daytona", funding: "VC-backed", language: "TypeScript", mcp: "No", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Secure code execution sandbox for AI", bestFor: "Secure code execution, AI sandboxing", limitations: "Infrastructure, not orchestration"},
+            {name: "Composio", category: "Tool Integration", stars: 26236, url: "https://github.com/ComposioHQ/composio", funding: "VC-backed", language: "TypeScript", mcp: "Yes", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "100+ tool integrations for AI agents", bestFor: "Tool integrations, function calling", limitations: "Integration platform, not framework"},
+            {name: "Salesforce Agentforce", category: "Enterprise Platform", stars: 0, url: "https://salesforce.com/agentforce", funding: "Salesforce", language: "Commercial", mcp: "No", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "Commercial", activity: "Active", description: "Enterprise CRM agents for sales/service", bestFor: "Enterprise CRM, sales/service agents", limitations: "Salesforce lock-in"},
+            {name: "Microsoft 365 Agents", category: "Enterprise Platform", stars: 630, url: "https://github.com/microsoft/Agents", funding: "Microsoft", language: "PowerShell", mcp: "Yes", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Proprietary", activity: "Active", description: "Teams agents and Copilot extensions", bestFor: "Teams, Copilot, M365 ecosystem", limitations: "Microsoft 365 ecosystem only"},
+            {name: "BeeAI Framework", category: "Enterprise Platform", stars: 3000, url: "https://github.com/i-am-bee/beeai-framework", funding: "IBM/LF", language: "Python", mcp: "Yes", a2a: "Yes", multimodal: "Yes", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "IBM's enterprise multi-agent with A2A", bestFor: "Enterprise multi-agent, A2A support", limitations: "Newer, enterprise-focused docs"},
+            {name: "LiveKit Agents", category: "Voice/Realtime", stars: 4500, url: "https://github.com/livekit/agents", funding: "LiveKit", language: "Python", mcp: "No", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Real-time voice/video agents with WebRTC", bestFor: "Real-time voice/video, WebRTC", limitations: "Specialized for realtime only"},
+            {name: "CAMEL-AI", category: "Research", stars: 7500, url: "https://github.com/camel-ai/camel", funding: "Academic", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Research", risk: "High", license: "Apache-2.0", activity: "Active", description: "Multi-agent societies and role-playing research", bestFor: "Multi-agent societies, research", limitations: "Academic focus"},
+            {name: "ControlFlow", category: "Workflow Orchestration", stars: 1400, url: "https://github.com/PrefectHQ/ControlFlow", funding: "Prefect", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Archived", risk: "High", license: "Apache-2.0", activity: "Archived", description: "ARCHIVED: Task-centric AI workflows", bestFor: "Do not use - merged into Marvin", limitations: "ARCHIVED - Use Marvin instead"},
+            {name: "Julep", category: "Stateful Agents", stars: 6600, url: "https://github.com/julep-ai/julep", funding: "VC-backed", language: "Python", mcp: "No", a2a: "No", multimodal: "Yes", production: "Growing", risk: "Medium", license: "Apache-2.0", activity: "Active", description: "Stateful AI agents with sessions and memory", bestFor: "Stateful agents, sessions, long-running", limitations: "Cloud-first, self-hosting complexity"},
+            {name: "Burr", category: "State Machine", stars: 1900, url: "https://github.com/apache/burr", funding: "Apache", language: "Python", mcp: "No", a2a: "No", multimodal: "Yes", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Apache state machine agent framework", bestFor: "State machine agents, decision apps", limitations: "Python-only, limited cloud options"},
+            {name: "DeerFlow", category: "Deep Research", stars: 18853, url: "https://github.com/bytedance/deer-flow", funding: "ByteDance", language: "Python", mcp: "No", a2a: "No", multimodal: "Yes", production: "Growing", risk: "Medium", license: "MIT", activity: "Active", description: "ByteDance deep research agent", bestFor: "Deep research, web search, crawling", limitations: "ByteDance ecosystem, newer"},
+            {name: "Suna", category: "General Agent", stars: 18910, url: "https://github.com/kortix-ai/suna", funding: "Kortix AI", language: "TypeScript", mcp: "No", a2a: "No", multimodal: "Yes", production: "Growing", risk: "Medium", license: "MIT", activity: "Active", description: "General-purpose agent platform", bestFor: "General agent platform, training", limitations: "Newer platform, smaller community"},
+            {name: "Parlant", category: "Customer Service", stars: 16799, url: "https://github.com/emcie-co/parlant", funding: "Emcie", language: "Python", mcp: "No", a2a: "No", multimodal: "No", production: "Yes", risk: "Low", license: "Apache-2.0", activity: "Active", description: "Customer service agents with behavioral control", bestFor: "Customer service, behavioral control", limitations: "Specialized for customer service"}
         ];
         
-        // Initialize table
         function initTable() {
             const tbody = document.getElementById('table-body');
             tbody.innerHTML = '';
             
             frameworks.forEach((fw, index) => {
                 const row = document.createElement('tr');
-                row.className = 'framework-row';
                 row.dataset.index = index;
                 
                 row.innerHTML = `
-                    <td><button class="expand-btn" onclick="toggleDetails(${index})">+</button></td>
-                    <td>
+                    <td class="col-name">
                         <div class="framework-name">
-                            <a href="${fw.url || fw.docs}" target="_blank">${fw.name}</a>
-                            <small>${fw.funding}</small>
+                            <a href="${fw.url}" target="_blank">${fw.name}</a>
+                            <span class="funding">${fw.funding}</span>
                         </div>
                     </td>
-                    <td><span class="badge badge-info">${fw.category}</span></td>
-                    <td class="stars">${fw.stars > 0 ? fw.stars.toLocaleString() : 'N/A'}</td>
-                    <td>${fw.language}</td>
-                    <td class="${getSupport(fw.mcp)}">${fw.mcp}</td>
-                    <td class="${getSupport(fw.a2a)}">${fw.a2a}</td>
-                    <td class="${getSupport(fw.multimodal)}">${fw.multimodal}</td>
-                    <td><span class="badge ${getProductionBadge(fw.production)}">${fw.production}</span></td>
-                    <td><span class="badge ${getRiskBadge(fw.risk)}">${fw.risk}</span></td>
-                    <td>${fw.setup > 0 ? fw.setup + ' min' : 'N/A'}</td>
+                    <td class="col-cat"><span class="cat-badge" style="background: ${getCategoryColor(fw.category)}22; color: ${getCategoryColor(fw.category)}">${fw.category}</span></td>
+                    <td class="col-desc wrap-text">${fw.description}</td>
+                    <td class="col-bestfor wrap-text">${fw.bestFor}</td>
+                    <td class="col-limit wrap-text">${fw.limitations}</td>
+                    <td class="col-stars"><span class="stars ${getStarsClass(fw.stars)}">${formatStars(fw.stars)}</span></td>
+                    <td class="col-lang">${fw.language}</td>
+                    <td class="col-icon">${getIcon(fw.mcp)}</td>
+                    <td class="col-icon">${getIcon(fw.a2a)}</td>
+                    <td class="col-icon">${getIcon(fw.multimodal)}</td>
+                    <td class="col-prod"><span class="badge ${getProductionBadge(fw.production)}">${fw.production}</span></td>
+                    <td class="col-risk"><span class="badge ${getRiskBadge(fw.risk)}">${fw.risk}</span></td>
+                    <td class="col-license"><span class="${getLicenseClass(fw.license)}">${fw.license}</span></td>
+                    <td class="col-activity"><span class="${getActivityClass(fw.activity)}">${fw.activity}</span></td>
                 `;
                 tbody.appendChild(row);
-                
-                // Details row
-                const detailsRow = document.createElement('tr');
-                detailsRow.className = 'details-row';
-                detailsRow.id = `details-${index}`;
-                detailsRow.innerHTML = `
-                    <td colspan="11">
-                        <div class="details-content">
-                            <div class="details-grid">
-                                <div class="details-section">
-                                    <h4>Best Use Cases</h4>
-                                    <p>${fw.useCases}</p>
-                                </div>
-                                <div class="details-section">
-                                    <h4>Known Limitations</h4>
-                                    <p>${fw.limitations}</p>
-                                </div>
-                                <div class="details-section">
-                                    <h4>Languages Supported</h4>
-                                    <p>${fw.allLang}</p>
-                                </div>
-                                <div class="details-section">
-                                    <h4>Documentation</h4>
-                                    <p><a href="${fw.docs}" target="_blank">${fw.docs}</a></p>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(detailsRow);
             });
             
             updateCounts();
         }
         
-        function getSupport(value) {
-            if (value === 'Yes') return 'support-yes';
-            if (value === 'Partial') return 'support-partial';
-            return 'support-no';
+        function getCategoryColor(category) {
+            const colors = {
+                'Core Orchestration': '#3b82f6', 'Multi-Agent': '#8b5cf6', 'RAG & Data': '#06b6d4',
+                'RAG Engine': '#06b6d4', 'RAG Platform': '#06b6d4', 'RAG UI': '#06b6d4',
+                'Lightweight': '#22c55e', 'Meta-Framework': '#22c55e', 'Utility': '#64748b',
+                'Cloud Platform': '#f59e0b', 'Visual/Low-Code': '#ec4899', 'Coding Agent': '#10b981',
+                'Protocol': '#6366f1', 'Infrastructure': '#78716c', 'Memory Infrastructure': '#f97316',
+                'Code Sandbox': '#71717a', 'Tool Integration': '#0891b2', 'Enterprise Platform': '#0ea5e9',
+                'Voice/Realtime': '#f43f5e', 'Research': '#a855f7', 'Browser Automation': '#14b8a6',
+                'Web Scraping': '#84cc16', 'Stateful Agents': '#8b5cf6', 'State Machine': '#6366f1',
+                'Deep Research': '#a855f7', 'General Agent': '#22c55e', 'Customer Service': '#be185d',
+                'Workflow Orchestration': '#ec4899', 'Observability': '#64748b'
+            };
+            return colors[category] || '#64748b';
+        }
+        
+        function formatStars(stars) {
+            if (stars === 0) return '-';
+            if (stars >= 1000) return Math.round(stars / 1000) + 'k';
+            return stars.toString();
+        }
+        
+        function getStarsClass(stars) {
+            if (stars >= 50000) return 'stars-high';
+            if (stars >= 10000) return 'stars-med';
+            return 'stars-low';
+        }
+        
+        function getIcon(value) {
+            if (value === 'Yes') return '<span class="icon-yes">&#10003;</span>';
+            if (value === 'Partial') return '<span class="icon-partial">&#9679;</span>';
+            if (value === 'N/A') return '<span class="icon-no">-</span>';
+            return '<span class="icon-no">&#10005;</span>';
         }
         
         function getProductionBadge(value) {
             if (value === 'Yes' || value === 'Standard') return 'badge-success';
             if (value === 'Growing') return 'badge-warning';
-            if (value === 'Experimental' || value === 'Early') return 'badge-danger';
+            if (value === 'Experimental' || value === 'Early' || value === 'Research') return 'badge-danger';
             return 'badge-secondary';
         }
         
@@ -1032,17 +999,20 @@
             return 'badge-danger';
         }
         
-        function toggleDetails(index) {
-            const detailsRow = document.getElementById(`details-${index}`);
-            const btn = document.querySelector(`tr[data-index="${index}"] .expand-btn`);
-            
-            if (detailsRow.classList.contains('visible')) {
-                detailsRow.classList.remove('visible');
-                btn.textContent = '+';
-            } else {
-                detailsRow.classList.add('visible');
-                btn.textContent = '-';
-            }
+        function getLicenseClass(license) {
+            if (license === 'MIT' || license === 'Apache-2.0') return 'license-permissive';
+            if (license === 'AGPL-3.0' || license === 'Sustainable') return 'license-copyleft';
+            if (license === 'Commercial' || license === 'Proprietary') return 'license-commercial';
+            if (license === 'BSL-1.1') return 'license-restrictive';
+            return '';
+        }
+        
+        function getActivityClass(activity) {
+            if (activity === 'Active') return 'activity-active';
+            if (activity === 'Moderate') return 'activity-moderate';
+            if (activity === 'Stale') return 'activity-stale';
+            if (activity === 'Archived') return 'activity-archived';
+            return '';
         }
         
         function filterTable() {
@@ -1051,35 +1021,34 @@
             const language = document.getElementById('language-filter').value;
             const production = document.getElementById('production-filter').value;
             const risk = document.getElementById('risk-filter').value;
+            const license = document.getElementById('license-filter').value;
             const mcpOnly = document.getElementById('mcp-filter').checked;
             const a2aOnly = document.getElementById('a2a-filter').checked;
             const multimodalOnly = document.getElementById('multimodal-filter').checked;
             
-            const rows = document.querySelectorAll('.framework-row');
+            const rows = document.querySelectorAll('#table-body tr');
             let visibleCount = 0;
             
             rows.forEach((row, index) => {
                 const fw = frameworks[index];
-                const detailsRow = document.getElementById(`details-${index}`);
-                
                 let visible = true;
                 
                 if (search && !fw.name.toLowerCase().includes(search) && 
                     !fw.category.toLowerCase().includes(search) &&
-                    !fw.useCases.toLowerCase().includes(search)) {
+                    !fw.description.toLowerCase().includes(search) &&
+                    !fw.bestFor.toLowerCase().includes(search)) {
                     visible = false;
                 }
-                if (category && fw.category !== category) visible = false;
-                if (language && !fw.language.includes(language) && !fw.allLang.includes(language)) visible = false;
+                if (category && !fw.category.includes(category)) visible = false;
+                if (language && !fw.language.includes(language)) visible = false;
                 if (production && fw.production !== production) visible = false;
                 if (risk && fw.risk !== risk) visible = false;
+                if (license && !fw.license.includes(license)) visible = false;
                 if (mcpOnly && fw.mcp !== 'Yes') visible = false;
                 if (a2aOnly && fw.a2a !== 'Yes') visible = false;
                 if (multimodalOnly && fw.multimodal !== 'Yes') visible = false;
                 
                 row.style.display = visible ? '' : 'none';
-                if (detailsRow) detailsRow.style.display = visible ? '' : 'none';
-                
                 if (visible) visibleCount++;
             });
             
@@ -1092,6 +1061,7 @@
             document.getElementById('language-filter').value = '';
             document.getElementById('production-filter').value = '';
             document.getElementById('risk-filter').value = '';
+            document.getElementById('license-filter').value = '';
             document.getElementById('mcp-filter').checked = false;
             document.getElementById('a2a-filter').checked = false;
             document.getElementById('multimodal-filter').checked = false;
@@ -1103,13 +1073,14 @@
             document.getElementById('production-count').textContent = frameworks.filter(f => f.production === 'Yes' || f.production === 'Standard').length;
             document.getElementById('mcp-count').textContent = frameworks.filter(f => f.mcp === 'Yes').length;
             document.getElementById('low-risk-count').textContent = frameworks.filter(f => f.risk === 'Low').length;
+            document.getElementById('opensource-count').textContent = frameworks.filter(f => f.license !== 'Commercial' && f.license !== 'Proprietary').length;
         }
         
         let sortDirection = {};
         
         function sortTable(column) {
             const tbody = document.getElementById('table-body');
-            const rows = Array.from(document.querySelectorAll('.framework-row'));
+            const rows = Array.from(tbody.querySelectorAll('tr'));
             
             sortDirection[column] = !sortDirection[column];
             const dir = sortDirection[column] ? 1 : -1;
@@ -1121,51 +1092,34 @@
                 const fwB = frameworks[indexB];
                 
                 let valA, valB;
-                
                 switch(column) {
-                    case 1: valA = fwA.name; valB = fwB.name; break;
-                    case 2: valA = fwA.category; valB = fwB.category; break;
-                    case 3: valA = fwA.stars; valB = fwB.stars; break;
-                    case 4: valA = fwA.language; valB = fwB.language; break;
-                    case 8: valA = fwA.production; valB = fwB.production; break;
-                    case 9: valA = fwA.risk; valB = fwB.risk; break;
-                    case 10: valA = fwA.setup; valB = fwB.setup; break;
+                    case 'name': valA = fwA.name; valB = fwB.name; break;
+                    case 'category': valA = fwA.category; valB = fwB.category; break;
+                    case 'stars': valA = fwA.stars; valB = fwB.stars; break;
+                    case 'production': valA = fwA.production; valB = fwB.production; break;
+                    case 'risk': valA = fwA.risk; valB = fwB.risk; break;
+                    case 'license': valA = fwA.license; valB = fwB.license; break;
                     default: return 0;
                 }
-                
-                if (typeof valA === 'number') {
-                    return (valA - valB) * dir;
-                }
+                if (typeof valA === 'number') return (valA - valB) * dir;
                 return valA.localeCompare(valB) * dir;
             });
             
-            // Reorder rows
-            rows.forEach(row => {
-                const index = row.dataset.index;
-                const detailsRow = document.getElementById(`details-${index}`);
-                tbody.appendChild(row);
-                if (detailsRow) tbody.appendChild(detailsRow);
-            });
+            rows.forEach(row => tbody.appendChild(row));
         }
         
         function switchTab(tabName) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            
             document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
             document.getElementById(`${tabName}-tab`).classList.add('active');
         }
         
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-        }
+        function toggleTheme() { document.body.classList.toggle('light-mode'); }
         
         function exportCSV() {
-            const headers = ['Framework', 'Category', 'Stars', 'Language', 'MCP', 'A2A', 'Multimodal', 'Production', 'Risk', 'Setup', 'Use Cases', 'Limitations'];
-            const rows = frameworks.map(f => [
-                f.name, f.category, f.stars, f.language, f.mcp, f.a2a, f.multimodal, f.production, f.risk, f.setup, `"${f.useCases}"`, `"${f.limitations}"`
-            ]);
-            
+            const headers = ['Framework','Category','Description','Best For','Limitations','Stars','Language','MCP','A2A','Multimodal','Production','Risk','License','Activity','URL'];
+            const rows = frameworks.map(f => [f.name,f.category,`"${f.description}"`,`"${f.bestFor}"`,`"${f.limitations}"`,f.stars,f.language,f.mcp,f.a2a,f.multimodal,f.production,f.risk,f.license,f.activity,f.url]);
             const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = URL.createObjectURL(blob);
@@ -1175,7 +1129,6 @@
             a.click();
         }
         
-        // Initialize on load
         initTable();
     </script>
 </body>
